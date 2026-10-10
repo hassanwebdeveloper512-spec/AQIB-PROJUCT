@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAO Infinity // Elite Futsal Championship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#8DC63F;
+  --green-glow:rgba(141,198,63,0.4);
+  --dark:#040806;
+  --surface:rgba(12,18,14,0.85);
+  --border:rgba(141,198,63,0.3);
+  --white:#ffffff;
+  --gray:#999999;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:#020403;
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:
+  radial-gradient(circle at 15% 20%,rgba(141,198,63,0.15) 0%,transparent 45%),
+  radial-gradient(circle at 85% 65%,rgba(141,198,63,0.12) 0%,transparent 50%),
+  radial-gradient(circle at 50% 100%,rgba(10,35,20,0.8) 0%,transparent 70%),
+  linear-gradient(rgba(141,198,63,0.03) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(141,198,63,0.03) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,40px 40px,40px 40px;
+  z-index:1;
+  pointer-events:none;
+}
+.bg-ambient-light{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:120vw;
+  height:120vh;
+  background:radial-gradient(circle,rgba(141,198,63,0.06) 0%,rgba(0,0,0,0) 65%);
+  pointer-events:none;
+  z-index:2;
+  animation:pulse-ambient 8s infinite alternate ease-in-out;
+}
+@keyframes pulse-ambient{
+  0%{transform:translate(-50%,-50%) scale(0.9);opacity:0.6;}
+  100%{transform:translate(-50%,-50%) scale(1.15);opacity:1;}
+}
+.nav-container{
+  width:100%;
+  max-width:1440px;
+  margin:0 auto;
+  padding:25px 40px;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+}
+.floating-navbar{
+  background:rgba(8,12,10,0.85);
+  border:1px solid var(--border);
+  border-radius:60px;
+  padding:16px 35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  backdrop-filter:blur(20px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.8),0 0 20px rgba(141,198,63,0.1);
+}
+.nav-left-group{
+  display:flex;
+  align-items:center;
+  gap:35px;
+}
+.nav-brand img{
+  height:58px;
+  width:auto;
+  display:block;
+  filter:drop-shadow(0 0 15px rgba(141,198,63,0.6));
+}
+.nav-status-indicator{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  color:var(--green);
+}
+.pulse-dot{
+  width:8px;
+  height:8px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 10px var(--green);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(141,198,63,0.7);}
+  70%{transform:scale(1);box-shadow:0 0 0 8px rgba(141,198,63,0);}
+  100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(141,198,63,0);}
+}
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.contact-btn-pill{
+  color:var(--green);
+  text-decoration:none;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  border:1px solid var(--border);
+  padding:12px 30px;
+  border-radius:30px;
+  background:rgba(141,198,63,0.05);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+}
+.contact-btn-pill:hover{
+  background:var(--green);
+  color:#000;
+  border-color:var(--green);
+  box-shadow:0 0 25px var(--green-glow);
+  transform:translateY(-2px);
+}
+.hero-stadium-bg{
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  background:
+  linear-gradient(180deg,rgba(2,4,3,0.35) 0%,rgba(2,4,3,0.55) 60%,#020403 100%),
+  url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+  display:flex;
+  align-items:center;
+  padding:140px 60px 80px;
+  z-index:10;
+}
+.hero-content-inner{
+  max-width:850px;
+  margin:0 auto;
+  width:100%;
+  text-align:center;
+}
+.badge-row{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+.cyber-badge{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:7px 16px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:rgba(141,198,63,0.15);
+  color:var(--green);
+  box-shadow:0 0 15px rgba(141,198,63,0.2);
+}
+.hero-content-inner h1{
+  font-family:'Syncopate',sans-serif;
+  font-size:52px;
+  font-weight:700;
+  line-height:1.15;
+  letter-spacing:-1px;
+  margin-bottom:25px;
+  color:#fff;
+  text-shadow:0 4px 30px rgba(0,0,0,0.9),0 0 20px rgba(141,198,63,0.3);
+}
+.hero-content-inner p{
+  color:#dddddd;
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:40px;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.hero-cta-btn{
+  background:var(--green);
+  color:#000;
+  padding:18px 40px;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
+  letter-spacing:1.5px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 10px 35px var(--green-glow);
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+}
+.hero-cta-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 50px var(--green-glow);
+}
+.container{
+  max-width:1380px;
+  margin:0 auto;
+  padding:0 60px;
+  position:relative;
+  z-index:10;
+}
+.section-title{
+  text-align:center;
+  margin-bottom:60px;
+}
+.section-title span{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:10px;
+  display:block;
+  text-shadow:0 0 10px var(--green-glow);
+}
+.section-title h2{
+  font-family:'Syncopate',sans-serif;
+  font-size:36px;
+  font-weight:700;
+  letter-spacing:-1px;
+}
+.divisions-section{
+  padding:100px 0;
+}
+.divisions-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:35px;
+}
+.division-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  overflow:hidden;
+  backdrop-filter:blur(30px);
+  transition:all .4s cubic-bezier(0.4,0,0.2,1);
+  opacity:0;
+  transform:translateY(30px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.8);
+}
+.division-card.animate-in{
+  opacity:1;
+  transform:translateY(0);
+}
+.division-card:hover{
+  transform:translateY(-10px);
+  border-color:var(--green);
+  box-shadow:0 35px 80px rgba(0,0,0,0.95),0 0 35px rgba(141,198,63,0.3);
+}
+.div-img-wrap{
+  height:260px;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+}
+.div-img-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+.division-card:hover .div-img-wrap img{
+  transform:scale(1.08);
+}
+.div-content{
+  padding:40px 35px;
+}
+.div-content span{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:3px;
+  color:var(--green);
+  margin-bottom:12px;
+  display:block;
+}
+.div-content h3{
+  font-size:24px;
+  font-weight:800;
+  margin-bottom:15px;
+}
+.div-content p{
+  color:var(--gray);
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+.div-link{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--green);
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:gap .3s ease;
+}
+.div-link:hover{
+  gap:12px;
+}
+.showcase-feature-section{
+  padding:40px 0 100px;
+}
+.showcase-feature-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.showcase-text-box h3{
+  font-family:'Syncopate',sans-serif;
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:20px;
+  line-height:1.2;
+}
+.showcase-text-box p{
+  color:var(--gray);
+  font-size:15px;
+  line-height:1.8;
+  margin-bottom:25px;
+}
+.showcase-img-box{
+  width:100%;
+  height:350px;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 25px 60px rgba(0,0,0,0.8),0 0 25px rgba(141,198,63,0.15);
+}
+.showcase-img-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+.showcase-img-box:hover img{
+  transform:scale(1.05);
+}
+.match-center-section{
+  padding:60px 0 100px;
+}
+.match-center-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+}
+.telemetry-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:40px;
+  backdrop-filter:blur(30px);
+  box-shadow:0 30px 70px rgba(0,0,0,0.9),inset 0 0 20px rgba(141,198,63,0.05);
+}
+.telemetry-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding-bottom:15px;
+}
+.telemetry-top span{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  color:var(--green);
+  text-transform:uppercase;
+}
+.match-score-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.6);
+  padding:25px;
+  border-radius:18px;
+  border:1px solid rgba(141,198,63,0.2);
+  margin-bottom:25px;
+}
+.team-score-box{
+  text-align:center;
+  flex:1;
+}
+.team-score-box span{
+  font-size:11px;
+  color:var(--gray);
+  letter-spacing:1px;
+  display:block;
+  margin-bottom:6px;
+  text-transform:uppercase;
+}
+.team-score-box h4{
+  font-size:18px;
+  font-weight:800;
+}
+.vs-divider{
+  font-family:'Syncopate',sans-serif;
+  font-size:16px;
+  font-weight:700;
+  color:var(--green);
+  padding:0 15px;
+  text-shadow:0 0 10px var(--green);
+}
+.match-info-list{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+.match-info-item{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.match-info-item span:first-child{
+  color:var(--gray);
+}
+.match-info-item span:last-child{
+  font-weight:700;
+  color:var(--white);
+}
+.exact-reference-footer{
+  background:#020403;
+  position:relative;
+  z-index:10;
+  border-top:1px solid var(--border);
+}
+.footer-cta-banner{
+  background:var(--green);
+  padding:70px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 0 50px var(--green-glow);
+}
+.footer-cta-left span{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#000;
+  display:block;
+  margin-bottom:10px;
+}
+.footer-cta-left h2{
+  font-family:'Syncopate',sans-serif;
+  font-size:48px;
+  font-weight:700;
+  color:#000;
+  letter-spacing:-1px;
+  line-height:1.1;
+}
+.footer-cta-btn{
+  background:#000;
+  color:var(--white);
+  padding:20px 35px;
+  border-radius:4px;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
+  letter-spacing:1.5px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition:all .3s ease;
+  white-space:nowrap;
+}
+.footer-cta-btn:hover{
+  background:#1a1a1a;
+  transform:translateY(-2px);
+  box-shadow:0 0 20px rgba(0,0,0,0.8);
+}
+.footer-main-content{
+  max-width:1400px;
+  margin:0 auto;
+  padding:90px 60px 70px;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:60px;
+}
+.footer-brand-col img{
+  height:48px;
+  width:auto;
+  margin-bottom:25px;
+  display:block;
+  filter:drop-shadow(0 0 10px rgba(141,198,63,0.4));
+}
+.footer-brand-col p{
+  color:var(--gray);
+  font-size:13px;
+  line-height:1.8;
+  max-width:320px;
+}
+.footer-links-col h4{
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  margin-bottom:25px;
+  color:var(--white);
+  text-transform:uppercase;
+}
+.footer-links-col ul{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.footer-links-col ul li a{
+  color:var(--gray);
+  text-decoration:none;
+  font-size:13px;
+  transition:color .3s;
+}
+.footer-links-col ul li a:hover{
+  color:var(--green);
+}
+.footer-contact-col ul li{
+  color:var(--gray);
+  font-size:13px;
+  margin-bottom:14px;
+}
+.footer-bottom-line{
+  max-width:1400px;
+  margin:0 auto;
+  padding:0 60px 50px;
+}
+.footer-bottom-divider{
+  width:100%;
+  height:1px;
+  background:rgba(255,255,255,0.08);
+}
+@media(max-width:1024px){
+  .nav-container{padding:15px 20px;}
+  .floating-navbar{padding:12px 20px;flex-direction:column;gap:15px;}
+  .nav-left-group{flex-direction:column;gap:12px;}
+  .hero-stadium-bg{padding:160px 20px 60px;}
+  .container{padding:0 25px;}
+  .divisions-grid{grid-template-columns:1fr;}
+  .showcase-feature-grid{grid-template-columns:1fr;}
+  .match-center-grid{grid-template-columns:1fr;}
+  .footer-cta-banner{flex-direction:column;gap:30px;text-align:center;padding:50px 20px;}
+  .footer-main-content{grid-template-columns:1fr;gap:40px;padding:60px 20px;}
+  .footer-cta-left h2{font-size:32px;}
+  .footer-bottom-line{padding:0 20px 40px;}
+}
+@media(max-width:600px){
+  .nav-brand img{height:45px;}
+  .nav-status-indicator{font-size:9px;}
+  .contact-btn-pill{padding:10px 20px;font-size:10px;}
+  .hero-stadium-bg{min-height:800px;padding:180px 20px 60px;}
+  .hero-content-inner h1{font-size:31px;}
+  .hero-content-inner p{font-size:13px;}
+  .hero-cta-btn{padding:15px 25px;font-size:11px;}
+  .section-title h2{font-size:25px;}
+  .section-title{margin-bottom:40px;}
+  .divisions-section{padding:70px 0;}
+  .div-content{padding:30px 25px;}
+  .div-content h3{font-size:21px;}
+  .showcase-img-box{height:260px;}
+  .telemetry-card{padding:25px 18px;}
+  .match-score-row{padding:18px 10px;}
+  .team-score-box h4{font-size:13px;}
+  .team-score-box span{font-size:8px;}
+  .vs-divider{font-size:12px;padding:0 8px;}
+  .match-info-item{font-size:11px;gap:15px;}
+  .footer-cta-left h2{font-size:27px;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-ambient-light"></div>
+
+<div class="nav-container">
+<nav class="floating-navbar">
+<div class="nav-left-group">
+<div class="nav-brand">
+<img src="HA LOGO.png" alt="SAO Infinity Logo">
+</div>
+<div class="nav-status-indicator">
+<div class="pulse-dot"></div>
+<span id="live-telemetry-text">SAO INFINITY FUTSAL MATRIX ONLINE</span>
+</div>
+</div>
+<div class="nav-right">
+<a href="contact.html" class="contact-btn-pill">CONTACT US &rarr;</a>
+</div>
+</nav>
+</div>
+
+<section class="hero-stadium-bg">
+<div class="hero-content-inner">
+<div class="badge-row">
+<span class="cyber-badge">TIER 1 DIVISION</span>
+<span class="cyber-badge">PROFESSIONAL FUTSAL LEAGUE</span>
+</div>
+<h1>PREMIER FUTSAL<br>CHAMPIONSHIP<br>ARCHITECTURE</h1>
+<p>Immerse your club in the ultimate tier of competitive futsal. Featuring professional indoor arenas, automated match telemetry, elite five-a-side competition, and championship tournament management.</p>
+<a href="register your team.html" class="hero-cta-btn">REGISTER TEAM NOW &rarr;</a>
+</div>
+</section>
+
+<div class="container">
+
+<section class="divisions-section">
+<div class="section-title">
+<span>Advanced Divisions</span>
+<h2>Elite Futsal Formats</h2>
+</div>
+
+<div class="divisions-grid" id="divisions-grid">
+
+<div class="division-card">
+<div class="div-img-wrap">
+<img src="sac ha.avif" alt="5v5 Futsal Championship">
+</div>
+<div class="div-content">
+<span>PRO DIVISION</span>
+<h3>5v5 Futsal Championship</h3>
+<p>Professional indoor futsal courts, official referees, advanced match telemetry, automated scoring support, and multi-angle broadcast coverage.</p>
+<a href="induxe.html" class="div-link">Secure Slot &rarr;</a>
+</div>
+</div>
+
+<div class="division-card">
+<div class="div-img-wrap">
+<img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?q=80&w=1000&auto=format&fit=crop" alt="Corporate Futsal Super League">
+</div>
+<div class="div-content">
+<span>CORPORATE ELITE</span>
+<h3>5v5 Super League</h3>
+<p>High-intensity tactical futsal engineered specifically for corporate squads, franchises, academies, and professional five-a-side teams.</p>
+<a href="induxe.html" class="div-link">Secure Slot &rarr;</a>
+</div>
+</div>
+
+<div class="division-card">
+<div class="div-img-wrap">
+<img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop" alt="Floodlit Futsal Night Series">
+</div>
+<div class="div-content">
+<span>AFTER-HOURS</span>
+<h3>Floodlit Futsal Night Series</h3>
+<p>High-energy indoor lighting infrastructure, official pitch tracking, live high-definition streams, and real-time interactive scoreboards.</p>
+<a href="induxe.html" class="div-link">Secure Slot &rarr;</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="showcase-feature-section">
+<div class="showcase-feature-grid">
+
+<div class="showcase-text-box">
+<span style="font-size:11px;font-weight:800;letter-spacing:3px;color:var(--green);margin-bottom:10px;display:block;">ADVANCED INFRASTRUCTURE</span>
+<h3>STATE-OF-THE-ART FUTSAL MATCH CONTROL & PITCH TELEMETRY</h3>
+<p>Every match is backed by full analytical telemetry, real-time player distance and speed tracking, automated goal detection, professional indoor court monitoring, and broadcast-ready camera streams.</p>
+<a href="induxe.html" class="div-link">Explore Systems &rarr;</a>
+</div>
+
+<div class="showcase-img-box">
+<img src="HA hasan.avif" alt="Futsal Arena Infrastructure">
+</div>
+
+</div>
+</section>
+
+<section class="match-center-section">
+<div class="section-title">
+<span>Match Center</span>
+<h2>Live Telemetry & Standings</h2>
+</div>
+
+<div class="match-center-grid">
+
+<div class="telemetry-card">
+<div class="telemetry-top">
+<span id="match-status-badge">LIVE FUTSAL TELEMETRY FEED</span>
+<span id="match-status-over">38' MINUTE</span>
+</div>
+
+<div class="match-score-row">
+<div class="team-score-box">
+<span>Home Unit</span>
+<h4>Karachi Futsal</h4>
+</div>
+
+<div class="vs-divider" id="dynamic-score-display">6 - 4</div>
+
+<div class="team-score-box">
+<span>Away Squad</span>
+<h4>Lahore Futsal</h4>
+</div>
+</div>
+
+<div class="match-info-list">
+
+<div class="match-info-item">
+<span>Arena Venue</span>
+<span>National Futsal Arena</span>
+</div>
+
+<div class="match-info-item">
+<span>Championship Prize</span>
+<span>$500K+ Equivalent Pool</span>
+</div>
+
+<div class="match-info-item">
+<span>Broadcasting Status</span>
+<span>4K Ultra HD Multi-Camera Feed</span>
+</div>
+
+</div>
+</div>
+
+<div class="telemetry-card">
+<div class="telemetry-top">
+<span>SEASON STANDINGS</span>
+<span>POINTS TABLE</span>
+</div>
+
+<div class="match-info-list" style="margin-top:10px;">
+
+<div class="match-info-item">
+<span>01. Karachi Futsal FC</span>
+<span style="color:var(--green);">18 PTS (+22 GD)</span>
+</div>
+
+<div class="match-info-item">
+<span>02. Lahore Futsal FC</span>
+<span style="color:var(--green);">15 PTS (+16 GD)</span>
+</div>
+
+<div class="match-info-item">
+<span>03. Islamabad Futsal</span>
+<span style="color:var(--green);">12 PTS (+10 GD)</span>
+</div>
+
+<div class="match-info-item">
+<span>04. Rawalpindi Futsal</span>
+<span>09 PTS (+04 GD)</span>
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+</div>
+
+<footer class="exact-reference-footer">
+
+<div class="footer-cta-banner">
+<div class="footer-cta-left">
+<span>HAVE A TEAM? HAVE A BRAND?</span>
+<h2>LET'S BUILD<br>SOMETHING BIG.</h2>
+</div>
+
+<div class="footer-cta-right">
+<a href="contact.html" class="footer-cta-btn">CONTACT SAO INFINITY &rarr;</a>
+</div>
+</div>
+
+<div class="footer-main-content">
+
+<div class="footer-brand-col">
+<img src="HA LOGO.png" alt="SAOInfinity">
+<p>SAO Infinity is a professional sports organization creating tournaments, competitions and opportunities for athletes.</p>
+</div>
+
+<div class="footer-links-col">
+<h4>QUICK LINKS</h4>
+<ul>
+<li><a href="induxe.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="football.html">Tournaments</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<div class="footer-links-col">
+<h4>TOURNAMENTS</h4>
+<ul>
+<li><a href="cricket.html">Cricket</a></li>
+<li><a href="football.html">Football</a></li>
+<li><a href="futsal.html">Futsal</a></li>
+<li><a href="contact.html">Upcoming Events</a></li>
+</ul>
+</div>
+
+<div class="footer-links-col footer-contact-col">
+<h4>CONTACT</h4>
+<ul>
+<li>Karachi, Pakistan</li>
+<li>info@sao-infinity.com</li>
+<li>+92 300 0000000</li>
+</ul>
+</div>
+
+</div>
+
+<div class="footer-bottom-line">
+<div class="footer-bottom-divider"></div>
+</div>
+
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+
+const cards=document.querySelectorAll(".division-card");
+
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach((entry,index)=>{
+if(entry.isIntersecting){
+setTimeout(()=>{
+entry.target.classList.add("animate-in");
+},index*150);
+}
+});
+},{threshold:0.1});
+
+cards.forEach(card=>observer.observe(card));
+
+const liveTextElement=document.getElementById("live-telemetry-text");
+
+const messages=[
+"SAO INFINITY FUTSAL MATRIX ONLINE",
+"FUTSAL BROADCAST FEED: ACTIVE 4K",
+"TOURNAMENT PROTOCOL SECURE"
+];
+
+let msgIndex=0;
+
+setInterval(()=>{
+msgIndex=(msgIndex+1)%messages.length;
+liveTextElement.style.opacity=0;
+
+setTimeout(()=>{
+liveTextElement.textContent=messages[msgIndex];
+liveTextElement.style.opacity=1;
+},300);
+
+},4000);
+
+const scoreDisplay=document.getElementById("dynamic-score-display");
+
+const scores=[
+"6 - 4",
+"7 - 4",
+"7 - 5",
+"8 - 5"
+];
+
+let scoreIdx=0;
+
+setInterval(()=>{
+scoreIdx=(scoreIdx+1)%scores.length;
+scoreDisplay.textContent=scores[scoreIdx];
+},5000);
+
+});
+</script>
+
+</body>
+</html>
