@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Team | SAO Infinity</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:Arial,Helvetica,sans-serif;
+            background:#07090b;
+            color:#fff;
+            overflow-x:hidden;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        button,
+        input,
+        select,
+        textarea{
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        :root{
+            --green:#7ee000;
+            --green-glow:rgba(126,224,0,0.35);
+            --black:#07090b;
+            --dark:#0b0e10;
+            --border:#282d30;
+            --gray:#8b9195;
+        }
+
+        .navbar{
+            width:calc(100% - 80px);
+            max-width:1270px;
+            height:92px;
+            background:rgba(5,10,8,0.92);
+            border:1px solid rgba(126,224,0,0.32);
+            border-radius:55px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 35px;
+            position:absolute;
+            top:22px;
+            left:50%;
+            transform:translateX(-50%);
+            z-index:20;
+            backdrop-filter:blur(18px);
+            -webkit-backdrop-filter:blur(18px);
+            box-shadow:0 15px 35px rgba(0,0,0,0.65),0 0 20px rgba(126,224,0,0.08);
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .logo-mark{
+            width:25px;
+            height:34px;
+            position:relative;
+            transform:skew(-18deg);
+        }
+
+        .logo-mark::before{
+            content:"";
+            position:absolute;
+            width:10px;
+            height:23px;
+            background:var(--green);
+            left:1px;
+            top:7px;
+        }
+
+        .logo-mark::after{
+            content:"";
+            position:absolute;
+            width:10px;
+            height:23px;
+            background:#8b9093;
+            right:0;
+            top:0;
+        }
+
+        .logo-text{
+            font-size:18px;
+            font-weight:400;
+            letter-spacing:-1px;
+        }
+
+        .logo-text span{
+            color:#a3a6a8;
+        }
+
+        .logo-text strong{
+            color:var(--green);
+            font-weight:500;
+        }
+
+        .broadcast-status{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-left:auto;
+            margin-right:28px;
+            color:var(--green);
+            font-size:11px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            white-space:nowrap;
+        }
+
+        .status-dot{
+            width:12px;
+            height:12px;
+            border-radius:50%;
+            background:var(--green);
+            box-shadow:0 0 0 5px rgba(126,224,0,0.12),0 0 14px rgba(126,224,0,0.55);
+        }
+
+        .back-btn{
+            border:1px solid rgba(126,224,0,0.38);
+            border-radius:30px;
+            padding:13px 29px;
+            color:var(--green);
+            font-size:12px;
+            font-weight:900;
+            letter-spacing:1px;
+            transition:.3s;
+            white-space:nowrap;
+        }
+
+        .back-btn:hover{
+            background:var(--green);
+            color:#000;
+            border-color:var(--green);
+        }
+
+        .hero{
+            position:relative;
+            text-align:center;
+            padding:180px 20px 70px;
+            background:
+                linear-gradient(180deg, rgba(7,9,11,0.55) 0%, rgba(7,9,11,0.9) 80%, #07090b 100%),
+                url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=1920&auto=format&fit=crop') no-repeat center 30%/cover;
+        }
+
+        .hero p{
+            color:var(--green);
+            font-size:12px;
+            font-weight:800;
+            letter-spacing:3px;
+            margin-bottom:15px;
+        }
+
+        .hero h1{
+            font-size:58px;
+            line-height:.95;
+            font-weight:900;
+            font-style:italic;
+            text-transform:uppercase;
+        }
+
+        .hero h1 span{
+            color:var(--green);
+        }
+
+        .hero small{
+            display:block;
+            color:#c7cbcd;
+            font-size:14px;
+            margin-top:20px;
+        }
+
+        .hero-stat-row{
+            display:flex;
+            justify-content:center;
+            gap:14px;
+            margin-top:35px;
+            flex-wrap:wrap;
+        }
+
+        .hero-stat-pill{
+            border:1px solid rgba(126,224,0,0.35);
+            background:rgba(126,224,0,0.08);
+            color:var(--green);
+            font-size:11px;
+            font-weight:800;
+            letter-spacing:1.5px;
+            padding:10px 20px;
+        }
+
+        .registration-wrap{
+            width:90%;
+            max-width:1200px;
+            margin:50px auto 90px;
+            display:grid;
+            grid-template-columns:0.85fr 1.3fr;
+            gap:0;
+            border:1px solid var(--border);
+            background:#0d1012;
+        }
+
+        .reg-side-panel{
+            position:relative;
+            min-height:100%;
+            background:url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1200&auto=format&fit=crop') no-repeat center/cover;
+        }
+
+        .reg-side-panel::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(180deg, rgba(7,9,11,0.35) 0%, rgba(7,9,11,0.85) 65%, #07090b 100%);
+        }
+
+        .reg-side-content{
+            position:relative;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-end;
+            padding:45px 35px;
+        }
+
+        .reg-side-content h3{
+            font-size:24px;
+            font-style:italic;
+            font-weight:900;
+            text-transform:uppercase;
+            line-height:1.15;
+            margin-bottom:18px;
+        }
+
+        .reg-side-content p{
+            color:#c7cbcd;
+            font-size:13px;
+            line-height:1.8;
+            margin-bottom:30px;
+        }
+
+        .reg-stat-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:16px;
+        }
+
+        .reg-stat-box{
+            border:1px solid rgba(126,224,0,0.3);
+            background:rgba(7,9,11,0.55);
+            padding:16px;
+        }
+
+        .reg-stat-box strong{
+            display:block;
+            color:var(--green);
+            font-size:22px;
+            font-weight:900;
+        }
+
+        .reg-stat-box span{
+            color:#a8adaf;
+            font-size:10px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .form-container{
+            padding:45px;
+        }
+
+        .form-title{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-bottom:1px solid var(--border);
+            padding-bottom:20px;
+            margin-bottom:30px;
+        }
+
+        .form-title h2{
+            font-size:21px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .form-title span{
+            color:var(--green);
+            font-size:11px;
+            font-weight:800;
+            letter-spacing:1px;
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:24px;
+        }
+
+        .input-box{
+            display:flex;
+            flex-direction:column;
+        }
+
+        .input-box.full{
+            grid-column:1/-1;
+        }
+
+        label{
+            color:#a8adaf;
+            font-size:11px;
+            font-weight:800;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            margin-bottom:9px;
+        }
+
+        input,
+        select,
+        textarea{
+            width:100%;
+            background:#07090b;
+            border:1px solid #363b3e;
+            color:#fff;
+            padding:15px;
+            outline:none;
+            font-size:14px;
+            transition:.3s;
+        }
+
+        input::placeholder,
+        textarea::placeholder{
+            color:#62686c;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus{
+            border-color:var(--green);
+            box-shadow:0 0 0 3px rgba(126,224,0,0.12);
+        }
+
+        input.error,
+        select.error,
+        textarea.error{
+            border-color:#ff3d3d;
+        }
+
+        input.valid,
+        select.valid,
+        textarea.valid{
+            border-color:#4d8d12;
+        }
+
+        select{
+            cursor:pointer;
+        }
+
+        select option{
+            background:#0d1012;
+            color:#fff;
+        }
+
+        textarea{
+            height:120px;
+            resize:none;
+        }
+
+        .error-message{
+            color:#ff4a4a;
+            font-size:11px;
+            margin-top:7px;
+            min-height:13px;
+            font-weight:600;
+        }
+
+        .submit-area{
+            display:flex;
+            justify-content:flex-end;
+            border-top:1px solid var(--border);
+            margin-top:10px;
+            padding-top:25px;
+        }
+
+        .submit-btn{
+            border:0;
+            background:var(--green);
+            color:#000;
+            padding:17px 38px;
+            font-size:13px;
+            font-weight:900;
+            letter-spacing:1px;
+            cursor:pointer;
+            transition:.3s;
+            box-shadow:0 10px 30px var(--green-glow);
+        }
+
+        .submit-btn:hover{
+            background:#fff;
+            transform:translateY(-2px);
+        }
+
+        .success-message{
+            display:none;
+            background:#162306;
+            border:1px solid #4e8117;
+            color:var(--green);
+            padding:15px;
+            margin-bottom:25px;
+            text-align:center;
+            font-size:13px;
+            font-weight:700;
+        }
+
+        .cta{
+            background:var(--green);
+            min-height:190px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:35px 5%;
+            gap:30px;
+        }
+
+        .cta h2{
+            color:#07090b;
+            font-size:48px;
+            line-height:.9;
+            font-style:italic;
+            font-weight:900;
+            text-transform:uppercase;
+        }
+
+        .cta-btn{
+            background:#07090b;
+            color:#fff;
+            padding:19px 27px;
+            font-size:12px;
+            font-weight:900;
+            letter-spacing:1px;
+            white-space:nowrap;
+        }
+
+        .footer{
+            background:#07090b;
+            padding:65px 5% 20px;
+        }
+
+        .footer-top{
+            display:grid;
+            grid-template-columns:2fr 1fr 1fr 1fr;
+            gap:50px;
+            padding-bottom:50px;
+        }
+
+        .footer-logo{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            margin-bottom:55px;
+        }
+
+        .footer-logo .logo-text{
+            font-size:27px;
+        }
+
+        .footer-description{
+            color:#687075;
+            max-width:360px;
+            font-size:11px;
+            line-height:1.9;
+        }
+
+        .footer-column h3{
+            font-size:13px;
+            letter-spacing:1px;
+            margin-bottom:20px;
+        }
+
+        .footer-column a,
+        .footer-column p{
+            display:block;
+            color:#687075;
+            font-size:10px;
+            margin-bottom:13px;
+            transition:.3s;
+        }
+
+        .footer-column a:hover{
+            color:var(--green);
+        }
+
+        .footer-bottom{
+            border-top:1px solid #1b1f21;
+            padding-top:20px;
+            display:flex;
+            justify-content:space-between;
+            color:#596065;
+            font-size:9px;
+            letter-spacing:1px;
+        }
+
+        @media(max-width:1000px){
+
+            .registration-wrap{
+                grid-template-columns:1fr;
+            }
+
+            .reg-side-panel{
+                min-height:260px;
+            }
+
+            .navbar{
+                width:calc(100% - 40px);
+                height:82px;
+                padding:0 25px;
+            }
+
+            .broadcast-status{
+                margin-right:20px;
+            }
+
+            .footer-top{
+                grid-template-columns:1.5fr 1fr 1fr;
+            }
+
+            .footer-contact{
+                grid-column:2/-1;
+            }
+        }
+
+        @media(max-width:700px){
+
+            .navbar{
+                width:calc(100% - 28px);
+                height:70px;
+                padding:0 18px;
+                top:14px;
+            }
+
+            .broadcast-status{
+                display:none;
+            }
+
+            .logo-mark{
+                width:25px;
+                height:36px;
+            }
+
+            .logo-mark::before,
+            .logo-mark::after{
+                width:10px;
+                height:24px;
+            }
+
+            .logo-text{
+                font-size:22px;
+            }
+
+            .broadcast-status{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-left:auto;
+            margin-right:28px;
+            color:var(--green);
+            font-size:11px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            white-space:nowrap;
+        }
+
+        .status-dot{
+            width:12px;
+            height:12px;
+            border-radius:50%;
+            background:var(--green);
+            box-shadow:0 0 0 5px rgba(126,224,0,0.12),0 0 14px rgba(126,224,0,0.55);
+        }
+
+        .back-btn{
+                padding:10px 12px;
+                font-size:9px;
+            }
+
+            .hero{
+                padding:115px 15px 45px;
+            }
+
+            .hero h1{
+                font-size:39px;
+            }
+
+            .hero small{
+                font-size:12px;
+                line-height:1.6;
+            }
+
+            .registration-wrap{
+                width:94%;
+                margin:30px auto 55px;
+            }
+
+            .form-container{
+                padding:25px 18px;
+            }
+
+            .form-title{
+                flex-direction:column;
+                align-items:flex-start;
+                gap:10px;
+            }
+
+            .form-grid{
+                grid-template-columns:1fr;
+                gap:18px;
+            }
+
+            .input-box.full{
+                grid-column:auto;
+            }
+
+            .submit-area{
+                justify-content:stretch;
+            }
+
+            .submit-btn{
+                width:100%;
+            }
+
+            .cta{
+                min-height:230px;
+                flex-direction:column;
+                align-items:flex-start;
+                justify-content:center;
+                padding:35px 25px;
+            }
+
+            .cta h2{
+                font-size:38px;
+            }
+
+            .cta-btn{
+                font-size:10px;
+            }
+
+            .footer{
+                padding:50px 25px 20px;
+            }
+
+            .footer-top{
+                grid-template-columns:1fr 1fr;
+                gap:40px 25px;
+            }
+
+            .footer-main{
+                grid-column:1/-1;
+            }
+
+            .footer-contact{
+                grid-column:auto;
+            }
+
+            .footer-logo{
+                margin-bottom:25px;
+            }
+
+            .footer-description{
+                max-width:100%;
+            }
+
+            .footer-bottom{
+                flex-direction:column;
+                gap:12px;
+                line-height:1.5;
+            }
+        }
+
+        @media(max-width:420px){
+
+            .logo-text{
+                font-size:19px;
+            }
+
+            .broadcast-status{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-left:auto;
+            margin-right:28px;
+            color:var(--green);
+            font-size:11px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            white-space:nowrap;
+        }
+
+        .status-dot{
+            width:12px;
+            height:12px;
+            border-radius:50%;
+            background:var(--green);
+            box-shadow:0 0 0 5px rgba(126,224,0,0.12),0 0 14px rgba(126,224,0,0.55);
+        }
+
+        .back-btn{
+                padding:9px 8px;
+            }
+
+            .hero h1{
+                font-size:32px;
+            }
+
+            .form-title h2{
+                font-size:18px;
+            }
+
+            .cta h2{
+                font-size:32px;
+            }
+
+            .footer-top{
+                grid-template-columns:1fr;
+            }
+
+            .footer-main,
+            .footer-contact{
+                grid-column:auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <a href="induxe.html" class="logo">
+            <div class="logo-mark"></div>
+
+            <div class="logo-text">
+                <span>SAO</span><strong>Infinity</strong>
+            </div>
+        </a>
+
+        <div class="broadcast-status">
+            <span class="status-dot"></span>
+            <span>BROADCAST FEED: ACTIVE 4K</span>
+        </div>
+
+        <a href="contact.html" class="back-btn">CONTACT US →</a>
+
+    </nav>
+
+
+    <section class="hero">
+
+        <p>SAO INFINITY CHAMPIONSHIP</p>
+
+        <h1>
+            REGISTER <span>YOUR TEAM</span>
+        </h1>
+
+        <small>
+            Enter your team details and get ready to compete.
+        </small>
+
+        <div class="hero-stat-row">
+            <div class="hero-stat-pill">32 TEAMS REGISTERED</div>
+            <div class="hero-stat-pill">$500K+ PRIZE POOL</div>
+            <div class="hero-stat-pill">4K BROADCAST COVERAGE</div>
+        </div>
+
+    </section>
+
+
+    <main class="registration-wrap">
+
+        <div class="reg-side-panel">
+            <div class="reg-side-content">
+                <h3>Compete At<br>The Highest Level</h3>
+                <p>
+                    Join the SAO Infinity Championship and put your squad up against
+                    the best teams across Pakistan. Full stadium access, official
+                    referees and complete match telemetry come standard.
+                </p>
+
+                <div class="reg-stat-grid">
+                    <div class="reg-stat-box">
+                        <strong>24 AUG</strong>
+                        <span>Season Kickoff</span>
+                    </div>
+                    <div class="reg-stat-box">
+                        <strong>Karachi</strong>
+                        <span>Main Sports Ground</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-container">
+
+            <div class="form-title">
+                <h2>Team Registration</h2>
+                <span>ALL FIELDS ARE REQUIRED</span>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                TEAM REGISTRATION SUBMITTED SUCCESSFULLY!
+            </div>
+
+            <form id="teamForm" novalidate>
+
+                <div class="form-grid">
+
+                    <div class="input-box">
+                        <label for="teamName">Team Name</label>
+                        <input type="text" id="teamName" placeholder="Enter your team name">
+                        <span class="error-message" id="teamNameError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="captainName">Captain Name</label>
+                        <input type="text" id="captainName" placeholder="Enter captain name">
+                        <span class="error-message" id="captainNameError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="email">Email Address</label>
+                        <input type="text" id="email" placeholder="Enter your email">
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" placeholder="03001234567">
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="sport">Game / Sport</label>
+
+                        <select id="sport">
+                            <option value="">Select Sport</option>
+                            <option value="Cricket">Cricket</option>
+                            <option value="Football">Football</option>
+                            <option value="Futsal">Futsal</option>
+                            <option value="Esports">Esports</option>
+                            <option value="Basketball">Basketball</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <span class="error-message" id="sportError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="players">Number of Players</label>
+
+                        <select id="players">
+                            <option value="">Select Players</option>
+                            <option value="5">5 Players</option>
+                            <option value="7">7 Players</option>
+                            <option value="11">11 Players</option>
+                            <option value="15">15 Players</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <span class="error-message" id="playersError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Enter your city">
+                        <span class="error-message" id="cityError"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="experience">Team Experience</label>
+
+                        <select id="experience">
+                            <option value="">Select Experience</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Professional">Professional</option>
+                            <option value="National">National Level</option>
+                        </select>
+
+                        <span class="error-message" id="experienceError"></span>
+                    </div>
+
+                    <div class="input-box full">
+                        <label for="members">Team Members</label>
+                        <textarea id="members" placeholder="Enter team members names..."></textarea>
+                        <span class="error-message" id="membersError"></span>
+                    </div>
+
+                    <div class="input-box full">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" placeholder="Tell us anything else about your team..."></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+
+                </div>
+
+                <div class="submit-area">
+
+                    <a href="registration-success.html"><button type="submit" class="submit-btn">
+                        SUBMIT TEAM REGISTRATION →
+                    </button>
+    </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <section class="cta">
+
+        <h2>
+            LET'S BUILD<br>
+            SOMETHING BIG.
+        </h2>
+
+        <a href="contact.html" class="cta-btn">
+            CONTACT SAO INFINITY →
+        </a>
+
+    </section>
+
+
+    <footer class="footer">
+
+        <div class="footer-top">
+
+            <div class="footer-main">
+
+                <a href="index.html" class="footer-logo logo">
+
+                    <div class="logo-mark"></div>
+
+                    <div class="logo-text">
+                        <span>SAO</span><strong>Infinity</strong>
+                    </div>
+
+                </a>
+
+                <p class="footer-description">
+                    SAO Infinity is a professional sports organization creating tournaments,
+                    competitions and opportunities for athletes.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>QUICK LINKS</h3>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>TOURNAMENTS</h3>
+
+                <a href="cricket.html">Cricket</a>
+                <a href="football.html">Football</a>
+                <a href="">Futsal</a>
+                <a href="#">Upcoming Events</a>
+
+            </div>
+
+
+            <div class="footer-column footer-contact">
+
+                <h3>CONTACT</h3>
+
+                <p>Karachi, Pakistan</p>
+                <p>info@sao-infinity.com</p>
+                <p>+92 300 0000000</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>© 2026 SAO INFINITY. ALL RIGHTS RESERVED.</span>
+
+            <span>SPORTS · TOURNAMENTS · INFINITY</span>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+       const form = document.getElementById("teamForm");
+
+const teamName = document.getElementById("teamName");
+const captainName = document.getElementById("captainName");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+const sport = document.getElementById("sport");
+const players = document.getElementById("players");
+const city = document.getElementById("city");
+const experience = document.getElementById("experience");
+const members = document.getElementById("members");
+const message = document.getElementById("message");
+
+function showError(input, errorId, text){
+    input.classList.add("error");
+    input.classList.remove("valid");
+    document.getElementById(errorId).textContent = text;
+}
+
+function showSuccess(input, errorId){
+    input.classList.remove("error");
+    input.classList.add("valid");
+    document.getElementById(errorId).textContent = "";
+}
+
+function validateTeamName(){
+    const value = teamName.value.trim();
+
+    if(value === ""){
+        showError(teamName, "teamNameError", "TEAM NAME IS REQUIRED");
+        return false;
+    }
+
+    if(value.length < 3){
+        showError(teamName, "teamNameError", "TEAM NAME MUST BE AT LEAST 3 CHARACTERS");
+        return false;
+    }
+
+    if(!/^[a-zA-Z0-9 ]+$/.test(value)){
+        showError(teamName, "teamNameError", "ONLY LETTERS, NUMBERS AND SPACES ARE ALLOWED");
+        return false;
+    }
+
+    showSuccess(teamName, "teamNameError");
+    return true;
+}
+
+function validateCaptain(){
+    const value = captainName.value.trim();
+
+    if(value === ""){
+        showError(captainName, "captainNameError", "CAPTAIN NAME IS REQUIRED");
+        return false;
+    }
+
+    if(value.length < 3){
+        showError(captainName, "captainNameError", "CAPTAIN NAME MUST BE AT LEAST 3 CHARACTERS");
+        return false;
+    }
+
+    if(!/^[a-zA-Z ]+$/.test(value)){
+        showError(captainName, "captainNameError", "ONLY LETTERS AND SPACES ARE ALLOWED");
+        return false;
+    }
+
+    showSuccess(captainName, "captainNameError");
+    return true;
+}
+
+function validateEmail(){
+    const value = email.value.trim();
+
+    const emailValidation =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if(value === ""){
+        showError(email, "emailError", "EMAIL IS REQUIRED");
+        return false;
+    }
+
+    if(!emailValidation.test(value)){
+        showError(email, "emailError", "EMAIL IS NOT VALID");
+        return false;
+    }
+
+    showSuccess(email, "emailError");
+    return true;
+}
+
+function validatePhone(){
+    const value = phone.value.trim();
+
+    const phoneValidation = /^03[0-9]{9}$/;
+
+    if(value === ""){
+        showError(phone, "phoneError", "PHONE NUMBER IS REQUIRED");
+        return false;
+    }
+
+    if(!phoneValidation.test(value)){
+        showError(
+            phone,
+            "phoneError",
+            "ENTER A VALID 11 DIGIT NUMBER LIKE 03001234567"
+        );
+        return false;
+    }
+
+    showSuccess(phone, "phoneError");
+    return true;
+}
+
+function validateSelect(input, errorId, messageText){
+    if(input.value === ""){
+        showError(input, errorId, messageText);
+        return false;
+    }
+
+    showSuccess(input, errorId);
+    return true;
+}
+
+function validateCity(){
+    const value = city.value.trim();
+
+    if(value === ""){
+        showError(city, "cityError", "CITY IS REQUIRED");
+        return false;
+    }
+
+    if(value.length < 2){
+        showError(city, "cityError", "ENTER A VALID CITY NAME");
+        return false;
+    }
+
+    if(!/^[a-zA-Z ]+$/.test(value)){
+        showError(city, "cityError", "ONLY LETTERS AND SPACES ARE ALLOWED");
+        return false;
+    }
+
+    showSuccess(city, "cityError");
+    return true;
+}
+
+function validateMembers(){
+    const value = members.value.trim();
+
+    if(value === ""){
+        showError(members, "membersError", "TEAM MEMBERS ARE REQUIRED");
+        return false;
+    }
+
+    if(value.length < 5){
+        showError(members, "membersError", "PLEASE ENTER TEAM MEMBERS");
+        return false;
+    }
+
+    showSuccess(members, "membersError");
+    return true;
+}
+
+function validateMessage(){
+    const value = message.value.trim();
+
+    if(value === ""){
+        showError(
+            message,
+            "messageError",
+            "ADDITIONAL INFORMATION IS REQUIRED"
+        );
+        return false;
+    }
+
+    if(value.length < 10){
+        showError(
+            message,
+            "messageError",
+            "PLEASE ENTER AT LEAST 10 CHARACTERS"
+        );
+        return false;
+    }
+
+    showSuccess(message, "messageError");
+    return true;
+}
+
+teamName.addEventListener("input", validateTeamName);
+
+captainName.addEventListener("input", validateCaptain);
+
+email.addEventListener("input", validateEmail);
+
+phone.addEventListener("input", function(){
+    this.value = this.value.replace(/[^0-9]/g, "").slice(0, 11);
+    validatePhone();
+});
+
+city.addEventListener("input", validateCity);
+
+members.addEventListener("input", validateMembers);
+
+message.addEventListener("input", validateMessage);
+
+sport.addEventListener("change", function(){
+    validateSelect(
+        sport,
+        "sportError",
+        "PLEASE SELECT A SPORT"
+    );
+});
+
+players.addEventListener("change", function(){
+    validateSelect(
+        players,
+        "playersError",
+        "PLEASE SELECT NUMBER OF PLAYERS"
+    );
+});
+
+experience.addEventListener("change", function(){
+    validateSelect(
+        experience,
+        "experienceError",
+        "PLEASE SELECT EXPERIENCE"
+    );
+});
+
+form.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const validTeamName = validateTeamName();
+    const validCaptain = validateCaptain();
+    const validEmail = validateEmail();
+    const validPhone = validatePhone();
+
+    const validSport = validateSelect(
+        sport,
+        "sportError",
+        "PLEASE SELECT A SPORT"
+    );
+
+    const validPlayers = validateSelect(
+        players,
+        "playersError",
+        "PLEASE SELECT NUMBER OF PLAYERS"
+    );
+
+    const validCity = validateCity();
+
+    const validExperience = validateSelect(
+        experience,
+        "experienceError",
+        "PLEASE SELECT EXPERIENCE"
+    );
+
+    const validMembers = validateMembers();
+    const validMessage = validateMessage();
+
+    if(
+        validTeamName &&
+        validCaptain &&
+        validEmail &&
+        validPhone &&
+        validSport &&
+        validPlayers &&
+        validCity &&
+        validExperience &&
+        validMembers &&
+        validMessage
+    ){
+
+        window.location.href = "registration-success.html";
+
+    }
+
+});
+    </script>
+
+</body>
+</html>

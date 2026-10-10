@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful | SAO Infinity</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:Arial,Helvetica,sans-serif;
+            background:#07090b;
+            color:#fff;
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        :root{
+            --green:#7ee000;
+            --black:#07090b;
+            --dark:#0d1012;
+            --border:#282d30;
+            --gray:#737a7e;
+        }
+
+        .navbar{
+            height:90px;
+            background:#080a0c;
+            border-bottom:1px solid #25292b;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 5%;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .logo-mark{
+            width:29px;
+            height:42px;
+            position:relative;
+            transform:skew(-18deg);
+        }
+
+        .logo-mark::before{
+            content:"";
+            position:absolute;
+            width:12px;
+            height:28px;
+            background:var(--green);
+            left:1px;
+            top:8px;
+        }
+
+        .logo-mark::after{
+            content:"";
+            position:absolute;
+            width:12px;
+            height:28px;
+            background:#8b9093;
+            right:0;
+            top:0;
+        }
+
+        .logo-text{
+            font-size:28px;
+            letter-spacing:-1.5px;
+        }
+
+        .logo-text span{
+            color:#a3a6a8;
+        }
+
+        .logo-text strong{
+            color:var(--green);
+            font-weight:500;
+        }
+
+        .home-btn{
+            border:1px solid #4f7e16;
+            padding:14px 24px;
+            color:#fff;
+            font-size:12px;
+            font-weight:800;
+            letter-spacing:1px;
+            transition:.3s;
+        }
+
+        .home-btn:hover{
+            background:var(--green);
+            color:#000;
+            border-color:var(--green);
+        }
+
+        .success-section{
+            min-height:620px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:70px 20px;
+            background:
+            radial-gradient(circle at center,rgba(126,224,0,.08),transparent 45%),
+            #07090b;
+        }
+
+        .success-box{
+            width:90%;
+            max-width:760px;
+            background:#0d1012;
+            border:1px solid #292e31;
+            padding:60px 50px;
+            text-align:center;
+            position:relative;
+        }
+
+        .success-box::before{
+            content:"";
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:4px;
+            background:var(--green);
+        }
+
+        .check{
+            width:82px;
+            height:82px;
+            border:2px solid var(--green);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin:0 auto 30px;
+            color:var(--green);
+            font-size:42px;
+            font-weight:bold;
+        }
+
+        .small-title{
+            color:var(--green);
+            font-size:12px;
+            font-weight:800;
+            letter-spacing:3px;
+            margin-bottom:15px;
+        }
+
+        .success-box h1{
+            font-size:52px;
+            line-height:.95;
+            font-style:italic;
+            font-weight:900;
+            text-transform:uppercase;
+            margin-bottom:20px;
+        }
+
+        .success-box h1 span{
+            color:var(--green);
+        }
+
+        .success-text{
+            color:#858c90;
+            font-size:14px;
+            line-height:1.8;
+            max-width:560px;
+            margin:0 auto 30px;
+        }
+
+        .registration-id{
+            background:#080a0c;
+            border:1px solid #292e31;
+            padding:18px;
+            margin:0 auto 30px;
+            max-width:420px;
+        }
+
+        .registration-id p{
+            color:#6f777b;
+            font-size:10px;
+            letter-spacing:2px;
+            margin-bottom:8px;
+        }
+
+        .registration-id strong{
+            color:var(--green);
+            font-size:20px;
+            letter-spacing:2px;
+        }
+
+        .buttons{
+            display:flex;
+            justify-content:center;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:16px 28px;
+            font-size:12px;
+            font-weight:900;
+            letter-spacing:1px;
+            transition:.3s;
+        }
+
+        .btn-green{
+            background:var(--green);
+            color:#000;
+        }
+
+        .btn-green:hover{
+            background:#fff;
+        }
+
+        .btn-dark{
+            border:1px solid #454b4e;
+            color:#fff;
+        }
+
+        .btn-dark:hover{
+            border-color:var(--green);
+            color:var(--green);
+        }
+
+        .cta{
+            background:var(--green);
+            min-height:190px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:35px 5%;
+            gap:30px;
+        }
+
+        .cta h2{
+            color:#07090b;
+            font-size:48px;
+            line-height:.9;
+            font-style:italic;
+            font-weight:900;
+            text-transform:uppercase;
+        }
+
+        .cta-btn{
+            background:#07090b;
+            color:#fff;
+            padding:19px 27px;
+            font-size:12px;
+            font-weight:900;
+            letter-spacing:1px;
+            white-space:nowrap;
+        }
+
+        .footer{
+            background:#07090b;
+            padding:65px 5% 20px;
+        }
+
+        .footer-top{
+            display:grid;
+            grid-template-columns:2fr 1fr 1fr 1fr;
+            gap:50px;
+            padding-bottom:50px;
+        }
+
+        .footer-logo{
+            display:inline-flex;
+            margin-bottom:55px;
+        }
+
+        .footer-logo .logo-text{
+            font-size:27px;
+        }
+
+        .footer-description{
+            color:#687075;
+            max-width:360px;
+            font-size:11px;
+            line-height:1.9;
+        }
+
+        .footer-column h3{
+            font-size:13px;
+            letter-spacing:1px;
+            margin-bottom:20px;
+        }
+
+        .footer-column a,
+        .footer-column p{
+            display:block;
+            color:#687075;
+            font-size:10px;
+            margin-bottom:13px;
+            transition:.3s;
+        }
+
+        .footer-column a:hover{
+            color:var(--green);
+        }
+
+        .footer-bottom{
+            border-top:1px solid #1b1f21;
+            padding-top:20px;
+            display:flex;
+            justify-content:space-between;
+            color:#596065;
+            font-size:9px;
+            letter-spacing:1px;
+        }
+
+        @media(max-width:900px){
+
+            .footer-top{
+                grid-template-columns:1.5fr 1fr 1fr;
+            }
+
+            .footer-contact{
+                grid-column:2/-1;
+            }
+        }
+
+        @media(max-width:700px){
+
+            .navbar{
+                height:75px;
+                padding:0 18px;
+            }
+
+            .logo-mark{
+                width:25px;
+                height:36px;
+            }
+
+            .logo-mark::before,
+            .logo-mark::after{
+                width:10px;
+                height:24px;
+            }
+
+            .logo-text{
+                font-size:22px;
+            }
+
+            .home-btn{
+                padding:10px 12px;
+                font-size:9px;
+            }
+
+            .success-section{
+                min-height:560px;
+                padding:45px 15px;
+            }
+
+            .success-box{
+                width:95%;
+                padding:45px 20px;
+            }
+
+            .check{
+                width:70px;
+                height:70px;
+                font-size:35px;
+            }
+
+            .success-box h1{
+                font-size:38px;
+            }
+
+            .success-text{
+                font-size:12px;
+            }
+
+            .cta{
+                min-height:230px;
+                flex-direction:column;
+                align-items:flex-start;
+                justify-content:center;
+                padding:35px 25px;
+            }
+
+            .cta h2{
+                font-size:38px;
+            }
+
+            .cta-btn{
+                font-size:10px;
+            }
+
+            .footer{
+                padding:50px 25px 20px;
+            }
+
+            .footer-top{
+                grid-template-columns:1fr 1fr;
+                gap:40px 25px;
+            }
+
+            .footer-main{
+                grid-column:1/-1;
+            }
+
+            .footer-contact{
+                grid-column:auto;
+            }
+
+            .footer-logo{
+                margin-bottom:25px;
+            }
+
+            .footer-description{
+                max-width:100%;
+            }
+
+            .footer-bottom{
+                flex-direction:column;
+                gap:12px;
+                line-height:1.5;
+            }
+        }
+
+        @media(max-width:420px){
+
+            .logo-text{
+                font-size:19px;
+            }
+
+            .home-btn{
+                padding:9px 8px;
+            }
+
+            .success-box h1{
+                font-size:32px;
+            }
+
+            .success-box{
+                padding:40px 16px;
+            }
+
+            .registration-id strong{
+                font-size:17px;
+            }
+
+            .buttons{
+                flex-direction:column;
+            }
+
+            .btn{
+                width:100%;
+            }
+
+            .footer-top{
+                grid-template-columns:1fr;
+            }
+
+            .footer-main,
+            .footer-contact{
+                grid-column:auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-mark"></div>
+
+            <div class="logo-text">
+                <span>SAO</span><strong>Infinity</strong>
+            </div>
+
+        </a>
+
+        <a href="induxe.html" class="home-btn">
+            BACK TO HOME
+        </a>
+
+    </nav>
+
+
+    <section class="success-section">
+
+        <div class="success-box">
+
+            <div class="check">
+                ✓
+            </div>
+
+            <div class="small-title">
+                SAO INFINITY CHAMPIONSHIP
+            </div>
+
+            <h1>
+                REGISTRATION <span>SUCCESSFUL</span>
+            </h1>
+
+            <p class="success-text">
+                Your team has been successfully registered for the SAO Infinity Championship.
+                Thank you for joining the competition. Our team will contact you shortly
+                with further details.
+            </p>
+
+            <div class="registration-id">
+
+                <p>
+                    YOUR REGISTRATION ID
+                </p>
+
+                <strong id="registrationId">
+                    SAO-2026-2027
+                </strong>
+
+            </div>
+
+            <div class="buttons">
+
+                <a href="induxe.html" class="btn btn-green">
+                    BACK TO HOME →
+                </a>
+
+                <a href="tournaments.html" class="btn btn-dark">
+                    VIEW TOURNAMENTS
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="cta">
+
+        <h2>
+            LET'S BUILD<br>
+            SOMETHING BIG.
+        </h2>
+
+        <a href="contact.html" class="cta-btn">
+            CONTACT SAO INFINITY →
+        </a>
+
+    </section>
+
+
+    <footer class="footer">
+
+        <div class="footer-top">
+
+            <div class="footer-main">
+
+                <a href="index.html" class="footer-logo logo">
+
+                    <div class="logo-mark"></div>
+
+                    <div class="logo-text">
+                        <span>SAO</span><strong>Infinity</strong>
+                    </div>
+
+                </a>
+
+                <p class="footer-description">
+                    SAO Infinity is a professional sports organization creating tournaments,
+                    competitions and opportunities for athletes.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>QUICK LINKS</h3>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+
+
+            <div class="footer-column footer-contact">
+
+                <h3>CONTACT</h3>
+
+                <p>Karachi, Pakistan</p>
+                <p>info@sao-infinity.com</p>
+                <p>+92 300 0000000</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 SAO INFINITY. ALL RIGHTS RESERVED.
+            </span>
+
+            <span>
+                SPORTS · TOURNAMENTS · INFINITY
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+        const registrationId = document.getElementById("registrationId");
+
+        const randomNumber = Math.floor(1000 + Math.random() * 9000);
+
+        registrationId.textContent = "SAO-2026-" + randomNumber;
+    </script>
+
+</body>
+</html>

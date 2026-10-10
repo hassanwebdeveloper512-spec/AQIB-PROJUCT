@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship - SAO Infinity</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #030604;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 30px;
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1400px;
+            background: rgba(8, 14, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(114, 191, 0, 0.35);
+            border-radius: 50px;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .brand-logo-img {
+            height: 42px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #72bf00;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #72bf00;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #72bf00;
+        }
+
+        .nav-contact-btn {
+            border: 1px solid rgba(114, 191, 0, 0.5);
+            color: #ffffff;
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-contact-btn:hover {
+            background-color: #72bf00;
+            color: #000000;
+            border-color: #72bf00;
+            box-shadow: 0 0 15px rgba(114, 191, 0, 0.4);
+        }
+
+        .hero-section {
+            padding: 210px 5% 90px 5%;
+            text-align: center;
+            background: radial-gradient(circle at top center, rgba(114, 191, 0, 0.15) 0%, rgba(3, 6, 4, 1) 70%);
+        }
+
+        .subtitle-tag {
+            color: #72bf00;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            font-size: 4.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            color: #72bf00;
+        }
+
+        .hero-desc {
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: #72bf00;
+            color: #000000;
+            padding: 16px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .services-section {
+            padding: 80px 5%;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 span {
+            color: #72bf00;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 35px;
+        }
+
+        .sponsor-card {
+            background: #09100b;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sponsor-card.highlight {
+            border-color: #72bf00;
+            box-shadow: 0 15px 35px rgba(114, 191, 0, 0.15);
+            background: linear-gradient(180deg, rgba(114, 191, 0, 0.06) 0%, #09100b 100%);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-8px);
+            border-color: #72bf00;
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .sponsor-card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .tier-tag {
+            background: rgba(114, 191, 0, 0.15);
+            color: #72bf00;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            align-self: flex-start;
+            border: 1px solid rgba(114, 191, 0, 0.3);
+        }
+
+        .sponsor-card.highlight .tier-tag {
+            background: #72bf00;
+            color: #000000;
+        }
+
+        .sponsor-card h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .sponsor-card p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .feature-list li {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-list li i {
+            color: #72bf00;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: rgba(114, 191, 0, 0.1);
+            border: 1px solid #72bf00;
+            color: #72bf00;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover, .sponsor-card.highlight .action-btn {
+            background: #72bf00;
+            color: #000000;
+        }
+
+        .footer-cta-banner {
+            background-color: #72bf00;
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-banner-text h2 {
+            color: #000000;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .cta-banner-btn {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .cta-banner-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .main-footer {
+            background-color: #000000;
+            padding: 80px 8% 40px 8%;
+            border-top: 1px solid #111111;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .footer-logo-img {
+            height: 45px;
+            width: auto;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: #6e7681;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #6e7681;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #72bf00;
+        }
+
+        .footer-bottom-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 25px;
+            text-align: center;
+            color: #484f58;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero-title { font-size: 2.8rem; }
+            .footer-cta-banner { flex-direction: column; text-align: center; gap: 20px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .status-badge { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <a href="induxe.html" class="brand-logo-wrap">
+                    <img src="HA LOGO.PNG" alt="SAO Infinity Logo" class="brand-logo-img">
+                </a>
+                <div class="status-badge">
+                    <span class="status-dot"></span> SAO INFINITY MATRIX ONLINE
+                </div>
+            </div>
+
+            <a href="contact.html" class="nav-contact-btn">CONTACT US &rarr;</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="subtitle-tag">MULTI-SPORT ARENA &nbsp;|&nbsp; TIER 1 LEAGUES</div>
+        <h1 class="hero-title">OUR SPONSORSHIP <span>&amp; ARENA DIVISION</span></h1>
+        <p class="hero-desc">Elevate your brand with SAO Infinity. Connect with thousands of passionate fans and sports teams through ground branding, digital live stream integration, and custom corporate partnerships.</p>
+        <a href="contact.html" class="hero-btn">BECOME A SPONSOR NOW &rarr;</a>
+    </section>
+
+    <section class="services-section">
+        <div class="section-header">
+            <h2>SPONSORSHIP <span>PACKAGES</span></h2>
+        </div>
+
+        <div class="grid-container">
+            <div class="sponsor-card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80" alt="Main Title Partner" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div>
+                        <span class="tier-tag">TITLE SPONSOR</span>
+                        <h3>MAIN TITLE PARTNER</h3>
+                        <p>Get maximum brand exposure as the official primary title sponsor of our premier sports tournaments.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Tournament Naming Rights</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Prime Ground &amp; Boundary Branding</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Logo on All Shirts &amp; Trophies</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Main Banner on Live Stream</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Dedicated Social Media Campaigns</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="action-btn">BECOME TITLE SPONSOR</a>
+                </div>
+            </div>
+
+            <div class="sponsor-card highlight">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="Powered By Partner" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div>
+                        <span class="tier-tag">CO-SPONSOR</span>
+                        <h3>POWERED BY PARTNER</h3>
+                        <p>Strategic brand positioning with high audience reach during prime-time matches and live broadcasts.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-circle-check"></i> "Powered By" Co-Branding Rights</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Mid-Field Backdrop Banners</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Digital Scoreboard Logo Placement</li>
+                            <li><i class="fa-solid fa-circle-check"></i> VIP Passes &amp; Hospitality Access</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Live Commentary Brand Mentions</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="action-btn">PARTNER WITH US</a>
+                </div>
+            </div>
+
+            <div class="sponsor-card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80" alt="Associate Partner" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div>
+                        <span class="tier-tag">CATEGORY SPONSOR</span>
+                        <h3>ASSOCIATE PARTNER</h3>
+                        <p>Ideal for targeted brand visibility, product sampling booths, or category-specific rights.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Boundary Board Advertisements</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Product Booth / Stalls at Venue</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Man of the Match Award Rights</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Social Media Video Shoutouts</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Team Kit Logo Placement</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="action-btn">GET SPONSORSHIP DECK</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-cta-banner">
+        <div class="cta-banner-text">
+            <h2>CUSTOM BRAND PARTNERSHIPS AVAILABLE</h2>
+        </div>
+        <a href="contact.html" class="cta-banner-btn">GET IN TOUCH &rarr;</a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="induxe.html" class="brand-logo-wrap" style="margin-bottom:20px;">
+                    <img src="HA LOGO.PNG" alt="SAO Infinity Logo" class="footer-logo-img">
+                </a>
+                <p>SAO Infinity is Pakistan's premier sports organization bringing companies, teams, and athletes together.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="induxe.html">Home</a></li>
+                    <li><a href="our mission.html">About Us</a></li>
+                    <li><a href="tournament-management.html">Tournaments</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="sport%20mangmant.html">Tournament Management</a></li>
+                    <li><a href="sports-events.html">Sports Events</a></li>
+                    <li><a href="sponsorship.html">Sponsorship</a></li>
+                    <li><a href="#">Sports Media</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>CONTACT</h3>
+                <p style="color:#6e7681; font-size:0.85rem; margin-bottom:10px;">Karachi, Pakistan</p>
+                <p style="color:#6e7681; font-size:0.85rem; margin-bottom:10px;">info@sao-infinity.com</p>
+                <p style="color:#6e7681; font-size:0.85rem;">+92 300 0000000</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom-line">
+            <p>&copy; 2026 SAO Infinity Sports Organization. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

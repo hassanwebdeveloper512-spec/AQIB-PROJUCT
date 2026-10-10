@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - SAO Infinity Multi-Sport Arena</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #050807;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 25px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1350px;
+            background: rgba(10, 18, 12, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(114, 191, 0, 0.35);
+            border-radius: 60px;
+            padding: 12px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo-img {
+            height: 65px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.08);
+        }
+
+        .status-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #72bf00;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .green-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #72bf00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #72bf00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .contact-btn {
+            border: 1px solid rgba(114, 191, 0, 0.5);
+            color: #ffffff;
+            background: rgba(114, 191, 0, 0.05);
+            padding: 12px 26px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #72bf00;
+            color: #000000;
+            border-color: #72bf00;
+            box-shadow: 0 0 20px rgba(114, 191, 0, 0.5);
+        }
+
+        .hero-section {
+            padding: 200px 5% 90px 5%;
+            background: radial-gradient(circle at center, rgba(114, 191, 0, 0.15) 0%, rgba(5, 8, 7, 1) 75%), linear-gradient(180deg, #050807 0%, #0b120e 100%);
+            text-align: center;
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #72bf00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .badge-tag span {
+            color: #ffffff;
+            opacity: 0.7;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .hero-title span {
+            color: #72bf00;
+        }
+
+        .hero-desc {
+            max-width: 850px;
+            margin: 0 auto;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .team-section {
+            padding: 90px 5%;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 span {
+            color: #72bf00;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .team-card {
+            background-color: #0d1410;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: #72bf00;
+            box-shadow: 0 15px 35px rgba(114, 191, 0, 0.2);
+        }
+
+        .team-img-wrapper {
+            width: 100%;
+            height: 340px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .social-overlay {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            display: flex;
+            gap: 12px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .social-overlay {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #72bf00;
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #ffffff;
+        }
+
+        .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: #72bf00;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .values-banner {
+            background: #080d0a;
+            padding: 80px 5%;
+            margin-top: 40px;
+            border-top: 1px solid rgba(114, 191, 0, 0.15);
+            border-bottom: 1px solid rgba(114, 191, 0, 0.15);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .value-box {
+            background: #0d1410;
+            padding: 35px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .value-icon {
+            font-size: 2.2rem;
+            color: #72bf00;
+            margin-bottom: 18px;
+        }
+
+        .value-box h4 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .value-box p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-cta-banner {
+            background-color: #72bf00;
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-banner-text h4 {
+            color: #000000;
+            font-size: 0.95rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .cta-banner-text h2 {
+            color: #000000;
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-banner-btn {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-banner-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .main-footer {
+            background-color: #000000;
+            padding: 80px 8% 40px 8%;
+            border-top: 1px solid #111111;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .footer-logo-img {
+            height: 55px;
+            width: auto;
+            margin-bottom: 25px;
+        }
+
+        .footer-brand p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #6e7681;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #72bf00;
+        }
+
+        .footer-contact-info p {
+            color: #6e7681;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .footer-bottom-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #484f58;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .status-tag {
+                display: none;
+            }
+            .logo-img {
+                height: 50px;
+            }
+            .footer-cta-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            .cta-banner-text h2 {
+                font-size: 2.2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <a href="induxe.html">
+                    <img src="HA LOGO.png" alt="SAO Infinity Logo" class="logo-img">
+                </a>
+                <div class="status-tag">
+                    <div class="green-dot"></div>
+                    SAO INFINITY MATRIX ONLINE
+                </div>
+            </div>
+            <a href="contact.html" class="contact-btn">CONTACT US &rarr;</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="badge-tag">
+            LEADERSHIP & MANAGEMENT <span>|</span> THE ARCHITECTS
+        </div>
+        <h1 class="hero-title">MEET THE TEAM BEHIND <span>SAO INFINITY</span></h1>
+        <p class="hero-desc">Driven by passion, sports technology, and operational excellence. Our executive leadership team brings together years of expertise in professional sports management, tournament execution, and athlete development.</p>
+    </section>
+
+    <section class="team-section">
+        <div class="section-header">
+            <h2>EXECUTIVE <span>LEADERSHIP & CREW</span></h2>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="CEO">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>SYED HAMZA ALI</h3>
+                    <div class="team-role">FOUNDER & CEO</div>
+                    <p class="team-bio">Visionary strategist leading SAO Infinity to transform corporate and competitive sports infrastructure across Pakistan.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80" alt="Head of Operations">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>SHAHZAIB KHAN</h3>
+                    <div class="team-role">HEAD OF OPERATIONS</div>
+                    <p class="team-bio">Overlooks pitch operations, ground logistics, and seamless match scheduling across all four major sports divisions.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Media & Marketing Director">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>AYESHA REHMAN</h3>
+                    <div class="team-role">MEDIA & BRAND DIRECTOR</div>
+                    <p class="team-bio">Spearheads live broadcast productions, tournament branding, digital coverage, and sponsor management.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80" alt="Tournament Director">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>FARHAN AHMED</h3>
+                    <div class="team-role">CHIEF TOURNAMENT DIRECTOR</div>
+                    <p class="team-bio">Ensures strict FIFA/ICC guidelines, referees' panel management, and fair competition across all leagues.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Event Operations Lead">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>ZARA MALIK</h3>
+                    <div class="team-role">EVENT OPERATIONS LEAD</div>
+                    <p class="team-bio">Manages match-day experiences, team registrations, security protocols, and ground hospitality for teams.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Technical Lead">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>USMAN SIDDIQUI</h3>
+                    <div class="team-role">HEAD OF SPORTS TECH</div>
+                    <p class="team-bio">Leads live scoring systems, player stats tracking, streaming tech, and digital scoreboard automation.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80" alt="Athlete Relations">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>SANA HASSAN</h3>
+                    <div class="team-role">ATHLETE RELATIONS MANAGER</div>
+                    <p class="team-bio">Dedicated point of contact for registered clubs, team managers, player contracts, and feedback.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=800&q=80" alt="Lead Referee Coordinator">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>BILAL ABBAS</h3>
+                    <div class="team-role">HEAD OF REFEREES & OFFICIALS</div>
+                    <p class="team-bio">Coordinates certified umpire and referee panels ensuring high-standard sportsmanship and fair play.</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80" alt="Creative & Visual Lead">
+                    <div class="social-overlay">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>HAMZA RIZWAN</h3>
+                    <div class="team-role">CREATIVE & VIDEO LEAD</div>
+                    <p class="team-bio">Directs high-octane tournament promos, match highlights, social media design, and broadcast graphics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-banner">
+        <div class="values-grid">
+            <div class="value-box">
+                <div class="value-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h4>PRECISION EXECUTION</h4>
+                <p>Every match is executed with clockwork precision, professional officiating, and live telemetry.</p>
+            </div>
+            <div class="value-box">
+                <div class="value-icon"><i class="fa-solid fa-users-gear"></i></div>
+                <h4>ATHLETE FIRST</h4>
+                <p>Prioritizing player safety, premium turf conditions, and high-value competitive opportunities.</p>
+            </div>
+            <div class="value-box">
+                <div class="value-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                <h4>STRUCTURED LEAGUES</h4>
+                <p>Building long-term sports leagues that provide a clear pathway for corporate and amateur talent.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-cta-banner">
+        <div class="cta-banner-text">
+            <h4>HAVE A TEAM? HAVE A BRAND?</h4>
+            <h2>LET'S BUILD SOMETHING BIG.</h2>
+        </div>
+        <a href="contact.html" class="cta-banner-btn">CONTACT SAO INFINITY &rarr;</a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="HA LOGO.png" alt="SAO Infinity Logo" class="footer-logo-img">
+                <p>SAO Infinity is a professional sports organization creating tournaments, competitions and opportunities for athletes.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="induxe.html">Home</a></li>
+                    <li><a href="our mission.html">About</a></li>
+                    <li><a href="#">Tournaments</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>TOURNAMENTS</h3>
+                <ul>
+                    <li><a href="cricket.html">Cricket</a></li>
+                    <li><a href="football.html">Football</a></li>
+                    <li><a href="futsule.html">Futsal</a></li>
+                    <li><a href="#">Upcoming Events</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact-info">
+                <h3>CONTACT</h3>
+                <p>Karachi, Pakistan</p>
+                <p>info@sao-infinity.com</p>
+                <p>+92 300 0000000</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom-line">
+            <p>&copy; 2026 SAO Infinity Sports Organization. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

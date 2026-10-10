@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAO Infinity | Elite Secure Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#8DC63F;
+  --green-light:#c2f56e;
+  --green-dark:#497914;
+  --gray:#8c8c8c;
+  --black:#020202;
+  --panel:rgba(8,8,8,0.82);
+  --panel2:rgba(15,15,15,0.9);
+  --border:rgba(255,255,255,0.09);
+  --white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html,body{height:100%;}
+body{
+  background:var(--black);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+.bg-glow{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+.bg-glow span{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(180px);
+  opacity:.4;
+}
+.bg-glow span:nth-child(1){
+  width:800px;height:800px;background:var(--green);
+  top:-300px;left:-300px;
+  animation:float1 9s ease-in-out infinite;
+}
+.bg-glow span:nth-child(2){
+  width:700px;height:700px;background:#2d4e0e;
+  bottom:-250px;right:-200px;
+  animation:float2 11s ease-in-out infinite;
+}
+.bg-glow span:nth-child(3){
+  width:450px;height:450px;background:var(--green-light);
+  top:35%;left:45%;
+  animation:float1 14s ease-in-out infinite reverse;
+  opacity:.2;
+}
+@keyframes float1{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg);}
+  50%{transform:translate(120px,80px) scale(1.12) rotate(180deg);}
+}
+@keyframes float2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg);}
+  50%{transform:translate(-100px,-70px) scale(0.88) rotate(-180deg);}
+}
+.grid-overlay{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+.top-logo{
+  position:fixed;
+  top:26px;
+  left:36px;
+  display:flex;
+  align-items:center;
+  z-index:20;
+}
+.top-logo img{
+  height:86px;
+  width:auto;
+  display:block;
+  filter:drop-shadow(0 0 25px rgba(141,198,63,0.6));
+  transition:transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.top-logo img:hover{transform:scale(1.08) rotate(-2deg);}
+.top-badge{
+  position:fixed;
+  top:34px;
+  right:36px;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--white);
+  text-transform:uppercase;
+  font-weight:600;
+  background:rgba(15,15,15,0.7);
+  padding:10px 22px;
+  border-radius:35px;
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(20px);
+  box-shadow:0 15px 35px rgba(0,0,0,.6);
+}
+.top-badge .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 18px var(--green);
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:.3;transform:scale(1.4);}
+}
+.container{
+  position:relative;
+  width:1020px;
+  max-width:96vw;
+  height:620px;
+  background:var(--panel);
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:32px;
+  box-shadow:0 60px 140px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.05),inset 0 1px 0 rgba(255,255,255,0.15);
+  overflow:hidden;
+  z-index:10;
+}
+.form-container{
+  position:absolute;
+  top:0;
+  height:100%;
+  width:50%;
+  display:flex;
+  align-items:center;
+  transition:transform .8s cubic-bezier(.7,0,.3,1),opacity .6s ease;
+}
+.sign-in-container{
+  left:0;
+  z-index:2;
+}
+.sign-up-container{
+  left:0;
+  opacity:0;
+  z-index:1;
+  pointer-events:none;
+}
+.container.right-panel-active .sign-in-container{
+  transform:translateX(100%);
+  opacity:0;
+}
+.container.right-panel-active .sign-up-container{
+  transform:translateX(100%);
+  opacity:1;
+  z-index:5;
+  pointer-events:auto;
+}
+form{
+  width:100%;
+  padding:0 58px;
+  color:var(--white);
+}
+.form-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--green);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  text-shadow:0 0 12px rgba(141,198,63,0.4);
+}
+.form-eyebrow::before{
+  content:"";
+  width:18px;height:2px;
+  background:var(--green);
+  display:inline-block;
+  box-shadow:0 0 12px var(--green);
+}
+form h1{
+  font-size:36px;
+  font-weight:800;
+  margin-bottom:6px;
+  letter-spacing:.3px;
+  line-height:1.15;
+}
+form h1 span{color:var(--green);text-shadow:0 0 30px rgba(141,198,63,0.5);}
+form p.sub{
+  color:var(--gray);
+  font-size:13px;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+.field{
+  position:relative;
+  margin-bottom:16px;
+}
+.field .icon{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:16px;height:16px;
+  color:#777;
+  transition:color .3s;
+}
+.field input{
+  width:100%;
+  padding:14px 16px 14px 44px;
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  color:var(--white);
+  font-size:14px;
+  outline:none;
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:inset 0 2px 5px rgba(0,0,0,0.4);
+}
+.field input::placeholder{color:#606060;}
+.field input:focus{
+  border-color:var(--green);
+  background:rgba(19,30,12,0.95);
+  box-shadow:0 0 0 4px rgba(141,198,63,0.25), inset 0 2px 5px rgba(0,0,0,0.4);
+}
+.field input:focus ~ .icon{color:var(--green);}
+.field .toggle-eye{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:18px;height:18px;
+  color:#777;
+  cursor:pointer;
+  background:none;
+  border:none;
+  padding:0;
+  transition:color .2s;
+}
+.field .toggle-eye:hover{color:var(--green);}
+.field .strength{
+  height:4px;
+  background:var(--border);
+  border-radius:4px;
+  margin-top:8px;
+  overflow:hidden;
+}
+.field .strength i{
+  display:block;
+  height:100%;
+  width:0%;
+  background:var(--green);
+  transition:width .4s cubic-bezier(0.4, 0, 0.2, 1),background .4s;
+  box-shadow:0 0 12px var(--green);
+}
+.row-between{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  color:var(--gray);
+  margin-bottom:18px;
+}
+.row-between a{color:var(--green);text-decoration:none;transition:opacity .2s;}
+.row-between a:hover{opacity:0.8;text-decoration:underline;}
+.checkbox{
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  user-select:none;
+}
+.checkbox input{display:none;}
+.checkbox .box{
+  width:16px;height:16px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.checkbox input:checked ~ .box{
+  background:var(--green);
+  border-color:var(--green);
+  box-shadow:0 0 14px rgba(141,198,63,0.6);
+}
+.checkbox .box svg{width:10px;height:10px;opacity:0;transition:opacity .15s;color:#020202;}
+.checkbox input:checked ~ .box svg{opacity:1;}
+.btn{
+  width:100%;
+  padding:15px;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  border:none;
+  border-radius:14px;
+  color:#020202;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:.5px;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 8px 22px rgba(141,198,63,0.35);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(141,198,63,0.55);}
+.btn:active{transform:translateY(0);}
+.btn svg{width:16px;height:16px;transition:transform .2s;}
+.btn:hover svg{transform:translateX(5px);}
+.divider{
+  display:flex;align-items:center;gap:12px;
+  margin:16px 0;
+  color:#666;
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.divider::before,.divider::after{
+  content:"";flex:1;height:1px;background:var(--border);
+}
+.social-row{
+  display:flex;gap:12px;
+}
+.social-btn{
+  flex:1;
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;
+  padding:12px;
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  color:var(--gray);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .25s;
+}
+.social-btn:hover{border-color:var(--green);color:var(--white);background:rgba(141,198,63,0.1);box-shadow:0 0 20px rgba(141,198,63,0.2);}
+.social-btn svg{width:16px;height:16px;}
+.switch-text{
+  margin-top:16px;
+  font-size:13px;
+  color:var(--gray);
+  text-align:center;
+}
+.switch-text button{
+  background:none;
+  border:none;
+  color:var(--green);
+  font-weight:600;
+  cursor:pointer;
+  font-size:13px;
+  transition:opacity .2s;
+}
+.switch-text button:hover{opacity:0.8;text-decoration:underline;}
+.overlay-container{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:50%;
+  height:100%;
+  overflow:hidden;
+  transition:transform .8s cubic-bezier(.7,0,.3,1);
+  z-index:15;
+}
+.container.right-panel-active .overlay-container{
+  transform:translateX(-100%);
+}
+.overlay{
+  background:
+    radial-gradient(circle at 30% 20%,rgba(141,198,63,.32),transparent 70%),
+    linear-gradient(160deg,#070d04,#020202 65%);
+  height:100%;
+  width:100%;
+  display:flex;
+  align-items:center;
+  padding:0 58px;
+  position:relative;
+  border-left:1px solid rgba(255,255,255,0.1);
+}
+.overlay-shape{
+  position:absolute;
+  width:320px;height:320px;
+  border:1px solid rgba(141,198,63,0.3);
+  border-radius:50%;
+  top:-90px;right:-90px;
+  animation:spin 40s linear infinite;
+  box-shadow:0 0 40px rgba(141,198,63,0.08);
+}
+.overlay-shape.two{
+  width:220px;height:220px;
+  top:auto;bottom:-70px;right:40px;
+  border-color:rgba(141,198,63,0.2);
+  animation:spin 30s linear infinite reverse;
+}
+@keyframes spin{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+.overlay-content{position:relative;z-index:2;}
+.overlay-content .tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--green);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  margin-bottom:14px;
+  text-shadow:0 0 12px rgba(141,198,63,0.4);
+}
+.overlay-content .tag::before{
+  content:"";width:18px;height:2px;background:var(--green);display:inline-block;
+  box-shadow:0 0 12px var(--green);
+}
+.overlay-content h2{
+  font-size:40px;
+  font-weight:800;
+  color:var(--white);
+  line-height:1.15;
+  font-style:italic;
+  margin-bottom:16px;
+}
+.overlay-content h2 span{color:var(--green);text-shadow:0 0 30px rgba(141,198,63,0.5);}
+.overlay-content p{
+  color:#b8b8b8;
+  font-size:13px;
+  line-height:1.7;
+  max-width:280px;
+  margin-bottom:28px;
+}
+.stat-row{
+  display:flex;
+  gap:30px;
+}
+.stat-row div b{
+  display:block;
+  font-size:26px;
+  font-weight:800;
+  color:var(--white);
+  text-shadow:0 0 25px rgba(255,255,255,0.2);
+}
+.stat-row div span{
+  font-size:11px;
+  color:var(--gray);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.dot-row{
+  position:absolute;
+  bottom:34px;
+  left:58px;
+  display:flex;
+  gap:8px;
+  z-index:2;
+}
+.dot-row span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#444;
+  transition:all .4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dot-row span.on{background:var(--green);width:36px;border-radius:4px;box-shadow:0 0 18px var(--green);}
+@media(max-width:820px){
+  .container{width:420px;height:auto;min-height:660px;border-radius:24px;}
+  .overlay-container{display:none;}
+  .form-container{width:100%;position:relative;padding:36px 0;}
+  .container.right-panel-active .sign-in-container{display:none;}
+  .sign-up-container{position:relative;opacity:0;height:0;overflow:hidden;pointer-events:none;}
+  .container.right-panel-active .sign-up-container{opacity:1;height:auto;overflow:visible;transform:none;pointer-events:auto;}
+  form{padding:0 30px;}
+  .top-logo{position:absolute;top:16px;left:18px;}
+  .top-logo img{height:60px;}
+  .top-badge{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"><span></span><span></span><span></span></div>
+<div class="grid-overlay"></div>
+
+<div class="top-logo">
+  <img src="HA LOGO.png" alt="SAO Infinity">
+</div>
+<div class="top-badge"><span class="dot"></span>SECURE ACCESS PORTAL</div>
+
+<div class="container" id="container">
+
+  <div class="form-container sign-in-container">
+    <form id="loginForm" novalidate>
+      <span class="form-eyebrow">Member Login</span>
+      <h1>Welcome <span>Back</span></h1>
+      <p class="sub">Sign in to continue your journey with SAO Infinity.</p>
+
+      <div class="field">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+        <input type="email" placeholder="Email address" required>
+      </div>
+      <div class="field">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <input type="password" id="loginPass" placeholder="Password" required>
+        <button type="button" class="toggle-eye" data-target="loginPass">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+
+      <div class="row-between">
+        <label class="checkbox">
+          <input type="checkbox">
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+          Remember me
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn">Login <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+
+      <div class="divider">or continue with</div>
+      <div class="social-row">
+        <button type="button" class="social-btn" id="googleLoginBtn">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44A7.27 7.27 0 1 1 19.5 8.9l2.05-2.05A10 10 0 1 0 12.19 22c5.75 0 9.87-4.05 9.87-9.86 0-.66-.07-1.28-.19-1.9z"/></svg>
+          Google
+        </button>
+        <button type="button" class="social-btn" id="facebookLoginBtn">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 9H15V6.5h-1.5C11.6 6.5 10 8.1 10 10v2H8.5v2.5H10V19h2.5v-4.5h1.9l.4-2.5h-2.3v-1.5c0-.7.2-1.5 1-1.5z"/></svg>
+          Facebook
+        </button>
+      </div>
+
+      <p class="switch-text">Don't have an account? <button type="button" id="toRegister">Sign Up</button></p>
+    </form>
+  </div>
+
+  <div class="form-container sign-up-container">
+    <form id="registerForm" novalidate>
+      <span class="form-eyebrow">Get Started</span>
+      <h1>Join <span>SAO Infinity</span></h1>
+      <p class="sub">Create your account and become part of something simple, modern and beautiful.</p>
+
+      <div class="field">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        <input type="text" placeholder="Full name" required>
+      </div>
+      <div class="field">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+        <input type="email" placeholder="Email address" required>
+      </div>
+      <div class="field">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <input type="password" id="regPass" placeholder="Create password" required>
+        <button type="button" class="toggle-eye" data-target="regPass">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <div class="strength"><i id="strengthBar"></i></div>
+      </div>
+
+      <button type="submit" class="btn">Create Account <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+
+      <p class="switch-text">Already have an account? <button type="button" id="toLogin">Login</button></p>
+    </form>
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-shape"></div>
+      <div class="overlay-shape two"></div>
+      <div class="overlay-content" id="overlayContent">
+        <span class="tag">SAO INFINITY</span>
+        <h2>Hello <span>Again!</span></h2>
+        <p>Sign in to continue your journey and access everything waiting for you.</p>
+        <div class="stat-row">
+          <div><b>32</b><span>Teams</span></div>
+          <div><b>500K+</b><span>Prize Pool</span></div>
+        </div>
+      </div>
+      <div class="dot-row" id="dotRow">
+        <span class="on"></span><span></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const container = document.getElementById('container');
+const overlayContent = document.getElementById('overlayContent');
+const dotRow = document.getElementById('dotRow');
+
+const loginOverlay = {
+  tag:'SAO INFINITY',
+  title:'Hello <span>Again!</span>',
+  text:'Sign in to continue your journey and access everything waiting for you.',
+  stats:'<div><b>32</b><span>Teams</span></div><div><b>500K+</b><span>Prize Pool</span></div>'
+};
+const registerOverlay = {
+  tag:'GET STARTED',
+  title:'Join The <span>Infinity</span>',
+  text:'Register now and become part of Pakistan\'s premier sports organization.',
+  stats:'<div><b>12+</b><span>Tournaments</span></div><div><b>2K+</b><span>Athletes</span></div>'
+};
+
+function setOverlay(data, dotIndex){
+  overlayContent.innerHTML =
+    '<span class="tag">' + data.tag + '</span>' +
+    '<h2>' + data.title + '</h2>' +
+    '<p>' + data.text + '</p>' +
+    '<div class="stat-row">' + data.stats + '</div>';
+  dotRow.innerHTML =
+    '<span class="' + (dotIndex===0?'on':'') + '"></span>' +
+    '<span class="' + (dotIndex===1?'on':'') + '"></span>';
+}
+
+document.getElementById('toRegister').addEventListener('click', () => {
+  container.classList.add('right-panel-active');
+  setOverlay(registerOverlay, 1);
+});
+
+document.getElementById('toLogin').addEventListener('click', () => {
+  container.classList.remove('right-panel-active');
+  setOverlay(loginOverlay, 0);
+});
+
+document.querySelectorAll('.toggle-eye').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = document.getElementById(btn.dataset.target);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+});
+
+const regPass = document.getElementById('regPass');
+const strengthBar = document.getElementById('strengthBar');
+regPass.addEventListener('input', () => {
+  const v = regPass.value;
+  let score = 0;
+  if(v.length > 5) score += 1;
+  if(v.length > 9) score += 1;
+  if(/[A-Z]/.test(v) && /[0-9]/.test(v)) score += 1;
+  if(/[^A-Za-z0-9]/.test(v)) score += 1;
+  const pct = (score/4)*100;
+  strengthBar.style.width = pct + '%';
+  strengthBar.style.background = pct < 50 ? '#e05252' : pct < 100 ? '#e0b752' : '#8DC63F';
+});
+
+document.getElementById('googleLoginBtn').addEventListener('click', () => {
+  window.open('https://accounts.google.com', '_blank', 'width=500,height=600');
+});
+
+document.getElementById('facebookLoginBtn').addEventListener('click', () => {
+  window.open('https://www.facebook.com/login', '_blank', 'width=500,height=600');
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('Login successful');
+});
+
+document.getElementById('registerForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('Account created successfully');
+});
+</script>
+
+</body>
+</html>

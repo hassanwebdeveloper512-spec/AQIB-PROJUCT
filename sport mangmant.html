@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Management - SAO Infinity</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #050807;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 25px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1350px;
+            background: rgba(10, 18, 12, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(114, 191, 0, 0.35);
+            border-radius: 60px;
+            padding: 12px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo-img {
+            height: 65px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.08);
+        }
+
+        .status-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #72bf00;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .green-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #72bf00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #72bf00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .contact-btn {
+            border: 1px solid rgba(114, 191, 0, 0.5);
+            color: #ffffff;
+            background: rgba(114, 191, 0, 0.05);
+            padding: 12px 26px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #72bf00;
+            color: #000000;
+            border-color: #72bf00;
+            box-shadow: 0 0 20px rgba(114, 191, 0, 0.5);
+        }
+
+        .hero-section {
+            padding: 210px 5% 100px 5%;
+            background: linear-gradient(180deg, rgba(5,8,7,0.7) 0%, rgba(5,8,7,1) 100%), 
+                        url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, #050807, transparent);
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #72bf00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: rgba(114, 191, 0, 0.1);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(114, 191, 0, 0.3);
+        }
+
+        .badge-tag span {
+            color: #ffffff;
+            opacity: 0.7;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .hero-title span {
+            color: #72bf00;
+            text-shadow: 0 0 25px rgba(114, 191, 0, 0.4);
+        }
+
+        .hero-desc {
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+            color: #d1d5db;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(13, 20, 16, 0.8);
+            border: 1px solid rgba(114, 191, 0, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item h3 {
+            font-size: 2.2rem;
+            color: #72bf00;
+            font-weight: 900;
+        }
+
+        .stat-item p {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .services-section {
+            padding: 100px 5%;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 span {
+            color: #72bf00;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 35px;
+        }
+
+        .service-card {
+            background: #0d1410;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: #72bf00;
+            box-shadow: 0 20px 40px rgba(114, 191, 0, 0.2);
+        }
+
+        .card-img-holder {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover .card-img-holder img {
+            transform: scale(1.1);
+        }
+
+        .card-icon-badge {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            background: #72bf00;
+            color: #000000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 35px 30px 30px 30px;
+        }
+
+        .card-body h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .card-body p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-features {
+            list-style: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 15px;
+        }
+
+        .card-features li {
+            font-size: 0.88rem;
+            color: #d1d5db;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-features li i {
+            color: #72bf00;
+        }
+
+        .workflow-section {
+            background: #080d0a;
+            padding: 90px 5%;
+            border-top: 1px solid rgba(114, 191, 0, 0.15);
+            border-bottom: 1px solid rgba(114, 191, 0, 0.15);
+        }
+
+        .workflow-container {
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .workflow-card {
+            background: #0d1410;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px 25px;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .step-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(114, 191, 0, 0.15);
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            line-height: 1;
+        }
+
+        .workflow-card h4 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: #72bf00;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .workflow-card p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-cta-banner {
+            background-color: #72bf00;
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-banner-text h4 {
+            color: #000000;
+            font-size: 0.95rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .cta-banner-text h2 {
+            color: #000000;
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-banner-btn {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-banner-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .main-footer {
+            background-color: #000000;
+            padding: 80px 8% 40px 8%;
+            border-top: 1px solid #111111;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .footer-logo-img {
+            height: 55px;
+            width: auto;
+            margin-bottom: 25px;
+        }
+
+        .footer-brand p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #6e7681;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #72bf00;
+        }
+
+        .footer-contact-info p {
+            color: #6e7681;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .footer-bottom-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #484f58;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            .status-tag {
+                display: none;
+            }
+            .logo-img {
+                height: 50px;
+            }
+            .footer-cta-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            .cta-banner-text h2 {
+                font-size: 2.2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <a href="induxe.html">
+                    <img src="HA LOGO.png" alt="SAO Infinity Logo" class="logo-img">
+                </a>
+                <div class="status-tag">
+                    <div class="green-dot"></div>
+                    SAO INFINITY MATRIX ONLINE
+                </div>
+            </div>
+            <a href="contact.html" class="contact-btn">CONTACT US &rarr;</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="badge-tag">
+            END-TO-END EVENT EXECUTION <span>|</span> PROFESSIONAL SERVICES
+        </div>
+        <h1 class="hero-title">TOURNAMENT <span>MANAGEMENT</span></h1>
+        <p class="hero-desc">We organize, execute, and stream professional multi-sport leagues. From pitch preparation and neutral referee panels to real-time digital scoring and grand closing ceremonies.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Events Managed</p>
+            </div>
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>Teams Hosted</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Neutral Officiating</p>
+            </div>
+            <div class="stat-item">
+                <h3>HD</h3>
+                <p>Live Streaming</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="section-header">
+            <h2>WHAT WE <span>DELIVER</span></h2>
+        </div>
+
+        <div class="grid-container">
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="League Fixtures">
+                    <div class="card-icon-badge"><i class="fa-solid fa-sitemap"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>LEAGUE STRUCTURE & FIXTURES</h3>
+                    <p>Professional scheduling system for knockouts, round-robins, and group stages to ensure transparent team draws.</p>
+                    <ul class="card-features">
+                        <li><i class="fa-solid fa-check"></i> Automated Point Tables & NRR</li>
+                        <li><i class="fa-solid fa-check"></i> Flexible Timelines & Slots</li>
+                        <li><i class="fa-solid fa-check"></i> Official Draw Ceremonies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80" alt="Venue Setup">
+                    <div class="card-icon-badge"><i class="fa-solid fa-landmark"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>VENUE & GROUND SETUP</h3>
+                    <p>High-quality ground booking, night floodlight setup, pitch maintenance, dugouts, and branding boards.</p>
+                    <ul class="card-features">
+                        <li><i class="fa-solid fa-check"></i> Floodlight & Turf Standards</li>
+                        <li><i class="fa-solid fa-check"></i> Team Dugouts & Water Stations</li>
+                        <li><i class="fa-solid fa-check"></i> Perimeter Brand Banners</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80" alt="Certified Referees">
+                    <div class="card-icon-badge"><i class="fa-solid fa-shield-halved"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>CERTIFIED OFFICIALS & REFEREES</h3>
+                    <p>Unbiased, neutral match referees, scorekeepers, and disciplinary boards enforcing official tournament rules.</p>
+                    <ul class="card-features">
+                        <li><i class="fa-solid fa-check"></i> Neutral Certified Umpires/Referees</li>
+                        <li><i class="fa-solid fa-check"></i> Official Match Scorers</li>
+                        <li><i class="fa-solid fa-check"></i> Code of Conduct Enforcement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Live Scoring & Analytics">
+                    <div class="card-icon-badge"><i class="fa-solid fa-chart-line"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>LIVE SCORING & ANALYTICS</h3>
+                    <p>Real-time online scorecard updates, ball-by-ball tracking, and tournament player stats integration.</p>
+                    <ul class="card-features">
+                        <li><i class="fa-solid fa-check"></i> Digital Scorecard Integration</li>
+                        <li><i class="fa-solid fa-check"></i> MVP & Top Scorer Leaderboards</li>
+                        <li><i class="fa-solid fa-check"></i> Match Summary Reports</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" alt="Logistics & Paramedic Care">
+                    <div class="card-icon-badge"><i class="fa-solid fa-kit-medical"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>LOGISTICS & PARAMEDIC CARE</h3>
+                    <p>Dedicated medical team for immediate first-aid, hydration stations, ground security, and crowd coordination.</p>
+                    <ul class="card-features">
+                        <li><i class="fa-solid fa-check"></i> On-Field Paramedics</li>
+                        <li><i class="fa-solid fa-check"></i> Security & Crowd Management</li>
+                        <li><i class="fa-solid fa-check"></i> Player Hydration Kits</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <img src="https://images.unsplash.com/photo-1578269174936-2709b6aeb913?auto=format&fit=crop&w=800&q=80" alt="Awards & Media Coverage">
+                    <div class="card-icon-badge"><i class="fa-solid fa-trophy"></i></div>
+                </div>
+                <div class="card-body">
+                    <h3>AWARDS & MEDIA COVERAGE</h3>
+                    <p>Custom laser-cut trophies, winner prize checks, media wall setups, and social media video highlights.</p>
+                    <ul class="card-features">
+                        <li><i class="fa-solid fa-check"></i> Custom Trophies & Medals</li>
+                        <li><i class="fa-solid fa-check"></i> HD Match Highlights & Photos</li>
+                        <li><i class="fa-solid fa-check"></i> Media Wall Backdrop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow-section">
+        <div class="workflow-container">
+            <div class="section-header">
+                <h2>HOW WE <span>OPERATE</span></h2>
+            </div>
+
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <div class="step-num">01</div>
+                    <h4>PLANNING & DRAWS</h4>
+                    <p>Team registration management, rulebook formulation, and fixture draws.</p>
+                </div>
+                <div class="workflow-card">
+                    <div class="step-num">02</div>
+                    <h4>GROUND SETUP</h4>
+                    <p>Pitch preparation, branding banners placement, and referee assignments.</p>
+                </div>
+                <div class="workflow-card">
+                    <div class="step-num">03</div>
+                    <h4>LIVE EXECUTION</h4>
+                    <p>Real-time digital scoring, match coordination, and live streaming setup.</p>
+                </div>
+                <div class="workflow-card">
+                    <div class="step-num">04</div>
+                    <h4>GRAND CLOSING</h4>
+                    <p>Trophy distribution, prize presentation, and post-match media release.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-cta-banner">
+        <div class="cta-banner-text">
+            <h4>WANT US TO MANAGE YOUR NEXT TOURNAMENT?</h4>
+            <h2>LETS WORK TOGETHER.</h2>
+        </div>
+        <a href="contact.html" class="cta-banner-btn">CONTACT US &rarr;</a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="HA LOGO.png" alt="SAO Infinity Logo" class="footer-logo-img">
+                <p>SAO Infinity is a professional sports organization creating tournaments, competitions and opportunities for athletes.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="induxe.html">Home</a></li>
+                    <li><a href="our mission.html">About</a></li>
+                    <li><a href="#">Tournaments</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="tournament-management.html">Tournament Management</a></li>
+                    <li><a href="#">Sports Events</a></li>
+                    <li><a href="#">Sponsorship</a></li>
+                    <li><a href="#">Sports Media</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact-info">
+                <h3>CONTACT</h3>
+                <p>Karachi, Pakistan</p>
+                <p>info@sao-infinity.com</p>
+                <p>+92 300 0000000</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom-line">
+            <p>&copy; 2026 SAO Infinity Sports Organization. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

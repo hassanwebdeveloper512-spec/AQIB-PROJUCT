@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission - SAO Infinity Multi-Sport Arena</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #050807;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 25px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1350px;
+            background: rgba(10, 18, 12, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(114, 191, 0, 0.35);
+            border-radius: 60px;
+            padding: 12px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo-img {
+            height: 65px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.08);
+        }
+
+        .status-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #72bf00;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .green-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #72bf00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #72bf00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .contact-btn {
+            border: 1px solid rgba(114, 191, 0, 0.5);
+            color: #ffffff;
+            background: rgba(114, 191, 0, 0.05);
+            padding: 12px 26px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #72bf00;
+            color: #000000;
+            border-color: #72bf00;
+            box-shadow: 0 0 20px rgba(114, 191, 0, 0.5);
+        }
+
+        .hero-section {
+            padding: 200px 5% 90px 5%;
+            background: radial-gradient(circle at center, rgba(114, 191, 0, 0.15) 0%, rgba(5, 8, 7, 1) 75%), linear-gradient(180deg, #050807 0%, #0b120e 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #72bf00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .badge-tag span {
+            color: #ffffff;
+            opacity: 0.7;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .hero-title span {
+            color: #72bf00;
+        }
+
+        .hero-desc {
+            max-width: 850px;
+            margin: 0 auto 40px auto;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .main-cta-btn {
+            background-color: #72bf00;
+            color: #000000;
+            padding: 18px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(114, 191, 0, 0.3);
+        }
+
+        .main-cta-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .games-overview {
+            padding: 60px 5%;
+            background: #080d0a;
+            border-top: 1px solid rgba(114, 191, 0, 0.15);
+            border-bottom: 1px solid rgba(114, 191, 0, 0.15);
+        }
+
+        .games-pills {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(114, 191, 0, 0.3);
+            padding: 15px 30px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .game-pill i {
+            color: #72bf00;
+            font-size: 1.2rem;
+        }
+
+        .sports-section {
+            padding: 100px 5%;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .section-main-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 70px;
+        }
+
+        .section-main-title span {
+            color: #72bf00;
+        }
+
+        .game-card-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+            background: #0a110d;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: border-color 0.3s ease;
+        }
+
+        .game-card-row:hover {
+            border-color: rgba(114, 191, 0, 0.4);
+        }
+
+        .game-card-row.reverse {
+            direction: rtl;
+        }
+
+        .game-card-row.reverse .game-text-content {
+            direction: ltr;
+        }
+
+        .game-text-content h3 {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .game-text-content h3 i {
+            color: #72bf00;
+        }
+
+        .game-text-content p {
+            color: #9ca3af;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .game-features-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .game-features-list li {
+            color: #e5e7eb;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .game-features-list li i {
+            color: #72bf00;
+        }
+
+        .game-img-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 380px;
+            border: 1px solid rgba(114, 191, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+        }
+
+        .game-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .game-img-container:hover img {
+            transform: scale(1.06);
+        }
+
+        .values-section {
+            background-color: #080d0a;
+            padding: 100px 5%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1350px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #0d1410;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #72bf00;
+            box-shadow: 0 10px 30px rgba(114, 191, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: #72bf00;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .card p {
+            color: #8b949e;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .stats-section {
+            padding: 90px 5%;
+            background-color: #050807;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1250px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-box {
+            background: #0b120e;
+            padding: 40px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(114, 191, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #72bf00;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-cta-banner {
+            background-color: #72bf00;
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-banner-text h4 {
+            color: #000000;
+            font-size: 0.95rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .cta-banner-text h2 {
+            color: #000000;
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-banner-btn {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-banner-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .main-footer {
+            background-color: #000000;
+            padding: 80px 8% 40px 8%;
+            border-top: 1px solid #111111;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .footer-logo-img {
+            height: 55px;
+            width: auto;
+            margin-bottom: 25px;
+        }
+
+        .footer-brand p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-col h3 {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #6e7681;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #72bf00;
+        }
+
+        .footer-contact-info p {
+            color: #6e7681;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .footer-bottom-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #484f58;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .game-card-row {
+                grid-template-columns: 1fr;
+                padding: 25px;
+            }
+            .game-card-row.reverse {
+                direction: ltr;
+            }
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .status-tag {
+                display: none;
+            }
+            .logo-img {
+                height: 50px;
+            }
+            .footer-cta-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            .cta-banner-text h2 {
+                font-size: 2.2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <a href="induxe.html">
+                    <img src="HA LOGO.png" alt="SAO Infinity Logo" class="logo-img">
+                </a>
+                <div class="status-tag">
+                    <div class="green-dot"></div>
+                    SAO INFINITY MATRIX ONLINE
+                </div>
+            </div>
+            <a href="contact.html" class="contact-btn">CONTACT US &rarr;</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="badge-tag">
+            MULTI-SPORT ARENA <span>|</span> TIER 1 LEAGUES
+        </div>
+        <h1 class="hero-title">OUR MISSION & <span>ARENA DIVISION</span></h1>
+        <p class="hero-desc">Empowering athletes across four major competitive sports. SAO Infinity brings professional infrastructure, high-tech match telemetry, structured leagues, and ultimate championship glory to Football, Cricket, Futsal, and Padel Tennis.</p>
+        <a href="register your team.html" class="main-cta-btn">REGISTER YOUR TEAM NOW &rarr;</a>
+    </section>
+
+    <section class="games-overview">
+        <div class="games-pills">
+            <div class="game-pill"><i class="fa-solid fa-football"></i> Football (11v11)</div>
+            <div class="game-pill"><i class="fa-solid fa-baseball-bat-ball"></i> Cricket Arena</div>
+            <div class="game-pill"><i class="fa-solid fa-futbol"></i> Futsal Turf</div>
+            <div class="game-pill"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Padel Tennis</div>
+        </div>
+    </section>
+
+    <section class="sports-section">
+        <h2 class="section-main-title">4 CORE <span>SPORTS DIVISIONS</span></h2>
+
+        <div class="game-card-row">
+            <div class="game-text-content">
+                <h3><i class="fa-solid fa-football"></i> 01. Football League</h3>
+                <p>Our premier 11-a-side football ecosystem is designed for professional clubs and corporate teams. We deliver full-pitch FIFA standard grounds, official refereeing panels, and live video streaming analytics.</p>
+                <ul class="game-features-list">
+                    <li><i class="fa-solid fa-check"></i> Standard 11v11 Full Pitch Tournaments</li>
+                    <li><i class="fa-solid fa-check"></i> Complete Player Telemetry & Match Statistics</li>
+                    <li><i class="fa-solid fa-check"></i> Official FIFA Rulebook & Certified Referees</li>
+                </ul>
+            </div>
+            <div class="game-img-container">
+                <img src="hahaha.avif" alt="Football Division">
+            </div>
+        </div>
+
+        <div class="game-card-row reverse">
+            <div class="game-text-content">
+                <h3><i class="fa-solid fa-baseball-bat-ball"></i> 02. Cricket Championship</h3>
+                <p>Experience high-energy Tape Ball and Hard Ball T20 / T10 cricket leagues. Featuring floodlit night matches, high-precision digital scoreboard tracking, and professional commentary setups.</p>
+                <ul class="game-features-list">
+                    <li><i class="fa-solid fa-check"></i> T20 and T10 Fast-Paced Formats</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Turf & Matting Pitches</li>
+                    <li><i class="fa-solid fa-check"></i> Live Score Telecast & MVP Player Awards</li>
+                </ul>
+            </div>
+            <div class="game-img-container">
+                <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1000&q=80" alt="Cricket Division">
+            </div>
+        </div>
+
+        <div class="game-card-row">
+            <div class="game-text-content">
+                <h3><i class="fa-solid fa-futbol"></i> 03. Futsal Arena</h3>
+                <p>Fast-paced, indoor and outdoor 5v5 / 7v7 cage futsal with high-density FIFA-approved artificial turf. Engineered for rapid passing, quick strategy, and high-scoring competitive fixtures.</p>
+                <ul class="game-features-list">
+                    <li><i class="fa-solid fa-check"></i> High-Density All-Weather AstroTurf</li>
+                    <li><i class="fa-solid fa-check"></i> Enclosed Cage Systems with LED Floodlights</li>
+                    <li><i class="fa-solid fa-check"></i> Fast-Track Knockout & League Cups</li>
+                </ul>
+            </div>
+            <div class="game-img-container">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80" alt="Futsal Division">
+            </div>
+        </div>
+
+        <div class="game-card-row reverse">
+            <div class="game-text-content">
+                <h3><i class="fa-solid fa-table-tennis-paddle-ball"></i> 04. Padel Tennis</h3>
+                <p>Step into the modern world of Padel Tennis with our panoramic glass wall courts. Offering double-category competitions, private coaching clinics, and world-class equipment integration.</p>
+                <ul class="game-features-list">
+                    <li><i class="fa-solid fa-check"></i> Panoramic Tempered Glass Wall Courts</li>
+                    <li><i class="fa-solid fa-check"></i> Doubles Knockout Tournaments</li>
+                    <li><i class="fa-solid fa-check"></i> Pro-grade Padel Rackets & Ball Supply</li>
+                </ul>
+            </div>
+            <div class="game-img-container">
+                <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1000&q=80" alt="Padel Tennis Division">
+            </div>
+        </div>
+
+    </section>
+
+    <section class="values-section">
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-trophy"></i></div>
+                <h3>Championship Standards</h3>
+                <p>Delivering premier trophy cups, high cash prizes, and corporate recognition across all 4 sports.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Fair Play & Rules</h3>
+                <p>Strict governance, certified match officials, and unbiased officiating for a competitive environment.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-microchip"></i></div>
+                <h3>Digital Tracking</h3>
+                <p>Real-time player leaderboards, match statistics, and digital coverage across social channels.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-people-group"></i></div>
+                <h3>Unified Community</h3>
+                <p>Connecting athletes, corporate entities, and sports enthusiasts in one unified arena matrix.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Core Sports Divisions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">80+</div>
+                <div class="stat-label">Tournaments Organized</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">450+</div>
+                <div class="stat-label">Active Sports Teams</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">15K+</div>
+                <div class="stat-label">Registered Athletes</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-cta-banner">
+        <div class="cta-banner-text">
+            <h4>HAVE A TEAM? HAVE A BRAND?</h4>
+            <h2>LET'S BUILD SOMETHING BIG.</h2>
+        </div>
+        <a href="contact.html" class="cta-banner-btn">CONTACT SAO INFINITY &rarr;</a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="HA LOGO.png" alt="SAO Infinity Logo" class="footer-logo-img">
+                <p>SAO Infinity is a professional sports organization creating tournaments, competitions and opportunities for athletes.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="induxe.html">Home</a></li>
+                    <li><a href="our mission.html">About</a></li>
+                    <li><a href="#">Tournaments</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>TOURNAMENTS</h3>
+                <ul>
+                    <li><a href="cricket.html">Cricket</a></li>
+                    <li><a href="football.html">Football</a></li>
+                    <li><a href="futsule.html">Futsal</a></li>
+                    <li><a href="#">Upcoming Events</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact-info">
+                <h3>CONTACT</h3>
+                <p>Karachi, Pakistan</p>
+                <p>info@sao-infinity.com</p>
+                <p>+92 300 0000000</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom-line">
+            <p>&copy; 2026 SAO Infinity Sports Organization. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
